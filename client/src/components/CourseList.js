@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-
+import Header from './Header';
 class CourseList extends Component {
 
     state = {
-        courseData: this.props.coursesToList,
+        courses: [],
     };
 
-
+    componentDidMount() {
+        fetch("http://localhost:5000/api/courses")
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ courses: data });
+        })
+        .catch(error => {
+          console.log('error getching' + error);
+        });
+      }
 
     
     render(){
-        console.log(this.props.coursesToList);
-        console.log(this.state.courseData);
         return(
             <div>
-            <div className="header">
-                <h1 className="header--logo">Courses</h1>
-                <nav><a className="signup" href="sign-up.html">Sign Up</a><a class="signin" href="sign-in.html">Sign In</a></nav>
-            </div>
+            <Header />
             <hr />
             <div className="bounds">
-            {this.props.coursesToList.map(course =>
+            {this.state.courses.map(course =>
                 <div className="grid-33"><a className="course--module course--link" href="course-detail.html">
                   <h4 className="course--label">Course</h4>
                   <h3 className="course--title">{course.title}</h3>
@@ -50,4 +54,6 @@ export default CourseList;
 </div>
 </div> */}
 
+// Header is going to be fixed 
+// Dom selector is going to be used/ Most probably
 

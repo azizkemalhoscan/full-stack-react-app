@@ -16,20 +16,21 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      courses: []
+      courses: [],
+      user: null,
     };
   }
 
-  componentDidMount() {
-    fetch("http://localhost:5000/api/courses")
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ courses: data });
-    })
-    .catch(error => {
-      console.log('error getching' + error);
-    });
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:5000/api/courses")
+  //   .then(res => res.json())
+  //   .then((data) => {
+  //     this.setState({ courses: data });
+  //   })
+  //   .catch(error => {
+  //     console.log('error getching' + error);
+  //   });
+  // }
   render(){
     return(
       <div>
