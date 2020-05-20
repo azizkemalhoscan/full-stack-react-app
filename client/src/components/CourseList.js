@@ -25,7 +25,7 @@ class CourseList extends Component {
             <hr />
             <div className="bounds">
             {this.state.courses.map(course =>
-                <div className="grid-33"><a className="course--module course--link" href="course-detail.html">
+                <div className="grid-33"><a className="course--module course--link" href="course/:id" >
                   <h4 className="course--label">Course</h4>
                   <h3 className="course--title">{course.title}</h3>
                 </a></div>            
@@ -56,4 +56,4 @@ export default CourseList;
 
 // Header is going to be fixed 
 // Dom selector is going to be used/ Most probably
-
+// href course/id will be amended to ensure it is static.
