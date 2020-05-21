@@ -44,7 +44,7 @@ class App extends Component {
           <Route path="/course/:id" render={() => <CourseDetail coursesDetail={this.state.courses} />} />
           <Route path="/signin" render={() => <UserSignIn coursesDetail={this.state.courses} />} />
           <Route path="/signup" render={() => <UserSignUp coursesDetail={this.state.courses} />} />
-          <Route path="/courses/update" render={() => <UpdateCourse coursesDetail={this.state.courses} />} />
+          <Route path="/courses/:id/update" render={() => <UpdateCourse coursesDetail={this.state.courses} />} />
           <Route path="/courses/create" render={() => <CreateCourse coursesDetail={this.state.courses} />} />
         </Switch>
       </BrowserRouter>

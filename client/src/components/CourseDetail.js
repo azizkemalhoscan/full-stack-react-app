@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 
+
 class CourseDetail extends Component {
     constructor(props){
         super(props);
@@ -19,7 +20,7 @@ class CourseDetail extends Component {
           console.log('error getching' + error);
         });
       }
-      
+
     render(){
         return(
             <div id="root">
