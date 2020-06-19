@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import CourseDetail from './CourseDetail';
-import {
-  Link
-} from 'react-router-dom';
+// import CourseDetail from './CourseDetail';
+// import {
+//   Link
+// } from 'react-router-dom';
 
 class CourseList extends Component {
 
     state = {
         courses: [],
-        id: 0,
     };
 
     componentDidMount() {
@@ -19,7 +18,7 @@ class CourseList extends Component {
           this.setState({ courses: data });
         })
         .catch(error => {
-          console.log('error getching' + error);
+          console.log('error catching' + error);
         });
       }
 
@@ -31,19 +30,22 @@ class CourseList extends Component {
 
 
     render(){
+      let coursesList = this.state.courses.map(course =>{
+        return (
+            <div className="grid-33"><a className="course--module course--link" href={`course/${course.id}`} >
+            <h4 className="course--label">Course</h4>
+            <h3 className="course--title">{course.title}</h3>
+            <h3 className="course--title">{course.id}</h3>
+          </a>
+        </div>               
+        )
+      })
         return(
             <div>
             <Header />
             <hr />
             <div className="bounds">
-            {this.state.courses.map(course =>
-                <div className="grid-33"><a className="course--module course--link" href={`course/${course.id}`} >
-                  <h4 className="course--label">Course</h4>
-                  <h3 className="course--title">{course.title}</h3>
-                  <h3 className="course--title">{course.id}</h3>
-                </a>
-                </div>            
-            )}    
+            {coursesList}            
               <div className="grid-33"><a className="course--module course--add--module" href="/courses/create">
                   <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                       viewBox="0 0 13 13" className="add">
