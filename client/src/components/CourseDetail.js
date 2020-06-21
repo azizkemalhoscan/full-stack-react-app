@@ -50,32 +50,32 @@ class CourseDetail extends Component {
                 <Header />
                 <hr/>
                 <div>
-                    <div class="actions--bar">
-                    <div class="bounds">
-                        <div class="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="#">Delete Course</a></span><a
-                            class="button button-secondary" href="/">Return to List</a></div>
+                    <div className="actions--bar">
+                    <div className="bounds">
+                        <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="#">Delete Course</a></span><a
+                            className="button button-secondary" href="/">Return to List</a></div>
                     </div>
                     </div>
                     <div class="bounds course--detail">
                         <div>
-                            <div class="grid-66">
-                        <div class="course--header">
-                        <h4 class="course--label">Course</h4>
-                        <h3 class="course--title">{this.state.courses.title}</h3>
+                            <div className="grid-66">
+                        <div className="course--header">
+                        <h4 className="course--label">Course</h4>
+                        <h3 className="course--title">{this.state.courses.title}</h3>
                         <p>By Joe Smith</p>
                         </div>
-                        <div class="course--description">
+                        <div className="course--description">
                         <p>{this.state.courses.description}</p>
                         </div>
                     </div>
-                    <div class="grid-25 grid-right">
-                        <div class="course--stats">
-                        <ul class="course--stats--list">
-                            <li class="course--stats--list--item">
+                    <div className="grid-25 grid-right">
+                        <div className="course--stats">
+                        <ul className="course--stats--list">
+                            <li className="course--stats--list--item">
                             <h4>Estimated Time</h4>
                             <h3>{this.state.courses.estimatedTime}</h3>
                             </li>
-                            <li class="course--stats--list--item">
+                            <li className="course--stats--list--item">
                             <h4>Materials Needed</h4>
                             <ul>
                                 <li>{this.state.courses.materialsNeeded}</li>

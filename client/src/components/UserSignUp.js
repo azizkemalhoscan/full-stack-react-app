@@ -46,13 +46,13 @@ class UserSignUp extends Component {
                     <h1>Sign Up</h1>
                     <div>
                         <form onSubmit={() => {this.handleSubmit()}}>
-                        <div><input id="firstName" name="firstName" type="text" class="" placeholder="First Name" onChange={(event) => {this.handleChange(event)}} value={this.state.firstName}></input></div>
-                        <div><input id="lastName" name="lastName" type="text" class="" placeholder="Last Name" onChange={(event) => {this.handleChange(event)}} value={this.state.lastName}></input></div>
-                        <div><input id="emailAddress" name="emailAddress" type="text" class="" placeholder="Email Address" onChange={(event) => {this.handleChange(event)}} value={this.state.email}></input></div>
-                        <div><input id="password" name="password" type="password" class="" placeholder="Password" onChange={(event) => {this.handleChange(event)}} value={this.state.password}></input></div>
-                        <div><input id="confirmPassword" name="confirmPassword" type="password" class="" placeholder="Confirm Password"
+                        <div><input id="firstName" name="firstName" type="text" className="" placeholder="First Name" onChange={(event) => {this.handleChange(event)}} value={this.state.firstName}></input></div>
+                        <div><input id="lastName" name="lastName" type="text" className="" placeholder="Last Name" onChange={(event) => {this.handleChange(event)}} value={this.state.lastName}></input></div>
+                        <div><input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" onChange={(event) => {this.handleChange(event)}} value={this.state.email}></input></div>
+                        <div><input id="password" name="password" type="password" className="" placeholder="Password" onChange={(event) => {this.handleChange(event)}} value={this.state.password}></input></div>
+                        <div><input id="confirmPassword" name="confirmPassword" type="password" className="" placeholder="Confirm Password"
                            onChange={(event) => {this.handleChange(event)}} value={this.state.confirmPassword}></input></div>
-                        <div class="grid-100 pad-bottom"><button class="button" type="submit">Sign Up</button><button class="button button-secondary" onclick="event.preventDefault(); location.href='index.html';">Cancel</button></div>
+                        <div class="grid-100 pad-bottom"><button class="button" type="submit">Sign Up</button><button className="button button-secondary" href='/'> Cancel</button></div>
                         </form>
                     </div>
                     <p>&nbsp;</p>

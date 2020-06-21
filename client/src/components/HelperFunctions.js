@@ -1,12 +1,15 @@
 import axios from 'axios';
 
-export const register = () => {
-    return axios
-    .post('/users', {
-        
-    })
+// export const register = () => {
+//     return axios
+//     .post('/users', {
+//         firstname: firstname,
+//         lastname: lastname,
+//         email: email,
+//         password: password
+//     })
 
-};
+// };
 
 export const  login = (user) => {
     return axios

@@ -1,13 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import { Provider } from './components/Context/index';
 import  { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch,
-  Redirect
+  Switch
 } from 'react-router-dom';
 import CourseList from './components/CourseList.js';
 import CourseDetail from './components/CourseDetail.js';

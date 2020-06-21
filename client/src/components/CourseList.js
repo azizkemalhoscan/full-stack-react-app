@@ -63,15 +63,9 @@ export default CourseList;
 
 
 //  This markup is for header
-{/* <div className="header">
-<div className="bounds">
-  <h1 class="header--logo">Courses</h1>
-  <nav><a class="signup" href="sign-up.html">Sign Up</a><a class="signin" href="sign-in.html">Sign In</a></nav>
-</div>
-</div> */}
+
 
 // Header is going to be fixed 
 // Dom selector is going to be used/ Most probably
 // href course/id will be amended to ensure it is static.
 
-{/* <Link to={`/courses/${course.id}` }>More info</Link> */}
