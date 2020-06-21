@@ -10,9 +10,15 @@ class UserSignIn extends Component {
     SigninErrors: ""
   };
 
-  handleChangeEvent(event){
+  handleEmailEvent(event){
     this.setState({
-      email: event.target.value 
+      email: event.target.value,
+    });
+  };
+
+  handlePasswordEvent(event){
+    this.setState({
+      password: event.target.value
     });
   };
 
@@ -54,9 +60,9 @@ class UserSignIn extends Component {
         <div class="grid-33 centered signin">
           <h1>Sign In</h1>
           <div>
-            <form onSubmit={() => {this.handleSubmit()}}>
-              <div><input id="emailAddress" name="emailAddress" type="text" class="" placeholder="Email Address" value={this.state.email} onChange={this.handleChangeEvent}></input></div>
-              <div><input id="password" name="password" type="password" class="" placeholder="Password" value={this.state.password} onChange={this.handleChangeEvent}></input></div>
+            <form onSubmit={(e) => {this.handleSubmit(e)}}>
+              <div><input id="emailAddress" name="emailAddress" type="text" class="" placeholder="Email Address" value={this.state.email} onChange={(event) => {this.handleEmailEvent(event)}}></input></div>
+              <div><input id="password" name="password" type="password" class="" placeholder="Password" value={this.state.password} onChange={(event) => {this.handlePasswordEvent(event)}}></input></div>
               <div class="grid-100 pad-bottom"><button class="button" type="submit">Sign In</button><Link to='/'><button class="button button-secondary">Cancel</button></Link></div>
             </form>
           </div>

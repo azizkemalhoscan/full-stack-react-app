@@ -1,12 +1,16 @@
 import axios from 'axios';
 
-export const signin = () => {
+export const register = () => {
+    return axios
+    .post('/users', {
+        
+    })
 
 };
 
-export const login = user => {
+export const  login = (user) => {
     return axios
-    .post('users/login', {
+    .post('/users', {
         email: user.email,
         password: user.password
     })
