@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import {Link} from 'react-router-dom';
-import { login } from './HelperFunctions';
+// import { login } from './HelperFunctions';
+import Data from '../Data';
+
 
 class UserSignIn extends Component {
   state = {
@@ -40,12 +42,12 @@ class UserSignIn extends Component {
       email: this.state.email,
       password: this.state.password
     };
-    login(user)
-    .then(res => {
-      if(res){
-        this.props.history.push('/');
-      }
-    })
+    // login(user)
+    // .then(res => {
+    //   if(res){
+    //     this.props.history.push('/');
+    //   }
+    // })
   }
 
 

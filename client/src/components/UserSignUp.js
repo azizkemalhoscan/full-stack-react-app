@@ -17,23 +17,48 @@ class UserSignUp extends Component {
         });
     }
 
-    handleSubmit (event) {
+    handleSubmit () {
         const { firstName, lastName, emailAddress, password, confirmPassword } = this.state;
+        const { context } = this.props;
 
-        axios
-        .post('http://localhost:5000/users', {
-            user: {
-                firstName: firstName,
-                lastName: lastName,
-                emailAddress: emailAddress,
-                password: password,
-                confirmPassword: confirmPassword
-            }
-        }, { withCredentials: true }).then(response => console.log('response', response)
-        .catch(err => console.log('errors', err)))
+        const user = {
+            firstName,
+            lastName,
+            emailAddress,
+            password,
+            confirmPassword,
+          };
 
-        event.preventDefault();
+          context.data.createUser(user)
+          .then(errors => {
+              if(errors.length) {
+                  this.setState({ errors });
+              } else {
+                  console.log(`${firstName} is succesfully signed up!`)
+              }
+          }).catch( err => { 
+            console.log(err);
+            this.props.history.push('/');
+          }); 
+        // event.preventDefault();
+
+
+        // axios
+        // .post('http://localhost:5000/users', {
+        //     user: {
+        //         firstName: firstName,
+        //         lastName: lastName,
+        //         emailAddress: emailAddress,
+        //         password: password,
+        //         confirmPassword: confirmPassword
+        //     }
+        // }, { withCredentials: true }).then(response => console.log('response', response)
+        // .catch(err => console.log('errors', err)))
     }
+
+    cancel = () => {
+        this.props.history.push('/');
+       }
 
     render(){
         return(

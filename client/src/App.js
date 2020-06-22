@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import { Provider } from './components/Context/index';
+import { Provider } from './components/Context/Context.js';
 import  { Component } from 'react';
 import {
   BrowserRouter,
@@ -14,6 +14,10 @@ import UserSignIn from './components/UserSignIn.js';
 import UserSignUp from './components/UserSignUp.js';
 import UpdateCourse from './components/UpdateCourse.js';
 import CreateCourse from './components/CreateCourse.js';
+import withContext from './components/Context/Context.js';
+
+
+const UserSignUpWithContext = withContext(UserSignUp);
 
 // Do not get a general component state here rather use courses state in relative components like courses details and index
 class App extends Component {
@@ -41,7 +45,7 @@ class App extends Component {
             <Route exact path="/" render={() => <CourseList coursesToList={this.state.courses} />} />
             <Route path="/course/:id" render={(props) => <CourseDetail coursesDetail={this.state.courses} {...props} />} />
             <Route path="/signin" render={() => <UserSignIn coursesDetail={this.state.courses} />} />
-            <Route path="/signup" render={() => <UserSignUp coursesDetail={this.state.courses} />} />
+            <Route path="/signup" render={() => <UserSignUpWithContext coursesDetail={this.state.courses} />} />
             <Route path="/courses/:id/update" render={() => <UpdateCourse coursesDetail={this.state.courses} />} />
             <Route path="/courses/create" render={() => <CreateCourse coursesDetail={this.state.courses} />} />
           </Switch>

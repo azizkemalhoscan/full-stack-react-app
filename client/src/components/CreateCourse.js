@@ -8,7 +8,7 @@ class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
-    userId: null
+    // userId: null
   }
 
   handleChange(event){
@@ -18,19 +18,54 @@ class CreateCourse extends Component {
   }
 
   handleSubmit(event) {
-    const { title, description, estimatedTime, materialsNeeded } = this.state;
-    axios
-    .post('http://localhost:5000/courses', { 
-      course: {
-        title: title,
-        description: description,
-        estimatedTime: estimatedTime,
-        materialsNeeded: materialsNeeded
-      }
-    })
-    .then(response => console.log('response for course creation', response))
-    .catch(err => console.log('error in createion!', err))
-    event.preventDefault();
+        // POST request using fetch with error handling
+        const { title, description, estimatedTime, materialsNeeded } = this.state;
+        const bodyElement = {
+          title: title,
+          description: description,
+          estimatedTime: estimatedTime,
+          materialsNeeded: materialsNeeded
+        }
+
+        const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(bodyElement)
+      };
+
+
+
+      fetch('http://localhost:5000/api/courses', requestOptions)
+          .then(async response => {
+              const data = await response.json();
+  
+              // check for error response
+              if (!response.ok) {
+                  // get error message from body or default to response status
+                  const error = (data && data.message) || response.status;
+                  return Promise.reject(error);
+              }
+  
+              this.setState({ postId: data.id })
+          })
+          .catch(error => {
+              this.setState({ errorMessage: error.toString() });
+              console.error('There was an error!', error);
+          });
+
+    // const { title, description, estimatedTime, materialsNeeded } = this.state;
+    // axios
+    // .post('http://localhost:5000/courses', { 
+    //   course: {
+    //     title: title,
+    //     description: description,
+    //     estimatedTime: estimatedTime,
+    //     materialsNeeded: materialsNeeded
+    //   }
+    // })
+    // .then(response => console.log('response for course creation', response))
+    // .catch(err => console.log('error in createion!', err))
+    // event.preventDefault();
   }
 
     render(){

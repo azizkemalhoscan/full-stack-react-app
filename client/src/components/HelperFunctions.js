@@ -13,7 +13,7 @@ import axios from 'axios';
 
 export const  login = (user) => {
     return axios
-    .post('/users', {
+    .get('/users', {
         email: user.email,
         password: user.password
     })
