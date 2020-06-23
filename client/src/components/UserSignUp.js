@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
-import axios from 'axios';
 
 class UserSignUp extends Component {
     state = {

@@ -18,6 +18,7 @@ import withContext from './components/Context/Context.js';
 
 
 const UserSignUpWithContext = withContext(UserSignUp);
+const UserSignInWithContext = withContext(UserSignIn);
 
 // Do not get a general component state here rather use courses state in relative components like courses details and index
 class App extends Component {
@@ -44,7 +45,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" render={() => <CourseList coursesToList={this.state.courses} />} />
             <Route path="/course/:id" render={(props) => <CourseDetail coursesDetail={this.state.courses} {...props} />} />
-            <Route path="/signin" render={() => <UserSignIn coursesDetail={this.state.courses} />} />
+            <Route path="/signin" render={() => <UserSignInWithContext coursesDetail={this.state.courses} />} />
             <Route path="/signup" render={() => <UserSignUpWithContext coursesDetail={this.state.courses} />} />
             <Route path="/courses/:id/update" render={() => <UpdateCourse coursesDetail={this.state.courses} />} />
             <Route path="/courses/create" render={() => <CreateCourse coursesDetail={this.state.courses} />} />

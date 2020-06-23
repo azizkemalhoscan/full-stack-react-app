@@ -9,7 +9,7 @@ class UserSignIn extends Component {
   state = {
     email: "",
     password: "",
-    SigninErrors: ""
+    signinErrors: []
   };
 
   handleEmailEvent(event){
@@ -38,16 +38,31 @@ class UserSignIn extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    const user = {
-      email: this.state.email,
-      password: this.state.password
-    };
+    const { context } = this.props;
+
+    const username = this.state.email;
+    const password = this.state.password;
+
+    context.actions.signIn(username, password)
+    .then( user => {
+      if( user === null){
+        this.setState(() => {
+          return { signinErrors: ['Sign in is unsuccesfull'] }
+        })
+      } else {
+        // this.props.history.push('/');
+        console.log(`SUCCESS! ${username} is now signed in!`);
+      }
+    }).catch( err => {
+      console.log(err);
+      // this.props.history.push('/error');
     // login(user)
     // .then(res => {
     //   if(res){
     //     this.props.history.push('/');
     //   }
     // })
+    })
   }
 
 
