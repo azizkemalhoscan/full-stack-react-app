@@ -50,12 +50,12 @@ class UserSignIn extends Component {
           return { signinErrors: ['Sign in is unsuccesfull'] }
         })
       } else {
-        // this.props.history.push('/');
+        this.props.history.push('/');
         console.log(`SUCCESS! ${username} is now signed in!`);
       }
     }).catch( err => {
       console.log(err);
-      // this.props.history.push('/error');
+      this.props.history.push('/error');
     // login(user)
     // .then(res => {
     //   if(res){
