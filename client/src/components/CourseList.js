@@ -7,6 +7,7 @@ import React, { Component } from 'react';
 class CourseList extends Component {
 
     state = {
+        authenticatedUser: this.props.context.authenticatedUser,
         courses: [],
     };
 

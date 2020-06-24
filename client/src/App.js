@@ -1,7 +1,6 @@
 import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import { Provider } from './components/Context/Context.js';
 import  { Component } from 'react';
 import {
   BrowserRouter,
@@ -26,10 +25,10 @@ const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 const UserSignOutWithContext = withContext(UserSignOut);
 const CourseDetailWithContext = withContext(CourseDetail);
+const CourseListWithContext = withContext(CourseList);
 
 // Do not get a general component state here rather use courses state in relative components like courses details and index
 class App extends Component {
-
   state = {
     courses: [],
   }
@@ -50,11 +49,11 @@ class App extends Component {
       <HeaderWithContext />
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" render={() => <CourseList coursesToList={this.state.courses} />} />
-            <Route path="/course/:id" render={(props) => <CourseDetailWithContext coursesDetail={this.state.courses} {...props} />} />
-            <Route path="/signin" render={(props) => <UserSignInWithContext coursesDetail={this.state.courses} {...props} />} />
+            <Route exact path="/" component={CourseListWithContext} />
+            <Route path="/course/:id" component={CourseDetailWithContext} />
+            <Route path="/signin" component={UserSignInWithContext} />
             <Route path="/signout" render={(props) => <UserSignOutWithContext coursesDetail={this.state.courses} {...props} />} />
-            <Route path="/signup" render={() => <UserSignUpWithContext coursesDetail={this.state.courses}  />} />
+            <Route path="/signup" component={UserSignUpWithContext} />
             <PrivateRoute path="/courses/:id/update" render={() => <UpdateCourseWithContext coursesDetail={this.state.courses} />} />
             <PrivateRoute path="/courses/create" render={() => <CreateCourseWithContext coursesDetail={this.state.courses} />} />
           </Switch>

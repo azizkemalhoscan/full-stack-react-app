@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 class UserSignIn extends Component {
   state = {
+    user: {},
     email: "",
     password: "",
     signinErrors: []
@@ -38,6 +39,9 @@ class UserSignIn extends Component {
           return { signinErrors: ['Sign in is unsuccesfull'] }
         })
       } else {
+        this.setState(
+         { user: user}
+        )
         this.props.history.push('/');
         console.log(`SUCCESS! ${username} is now signed in!`);
       }
