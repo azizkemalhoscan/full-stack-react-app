@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
 
 class UserSignUp extends Component {
     state = {
@@ -62,7 +61,6 @@ class UserSignUp extends Component {
     render(){
         return(
             <div id="root">           
-              <Header />
                 <div>
                 <hr></hr>
                 <div class="bounds">

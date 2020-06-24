@@ -1,22 +1,30 @@
 import React from 'react';
 
 const Header = (props) => {
+    const { context } = props;
 
-    return(
-        <div>
+
+    const authUser = context.authenticatedUser;
+    console.log(authUser);
+
+    const conditionalHeaderRender = authUser ? 
         <div className="header">
-            <div className="bounds">
-            
+            <div className="bounds">  
                 <h1 className="header--logo">Courses</h1>
-                <nav><span>Welcome Joe Smith!</span><a className="signout" href="signout">Sign Out</a></nav>
+                <nav><span>{`Welcome ${authUser.firstName}!`}</span><a className="signout" href="signout">Sign Out</a></nav>
             </div>
-        </div>
+        </div> 
+    : 
         <div className="header">
             <div className="bounds">
                 <h1 className="header--logo">Courses</h1>
                 <nav><a className="signup" href="signup">Sign Up</a><a className="signin" href="signin">Sign In</a></nav>
             </div>
         </div>
+
+    return(
+        <div>
+            {conditionalHeaderRender}
         </div>
     );
 };

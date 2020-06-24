@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Header from './Header';
 import {Link} from 'react-router-dom';
 // import { login } from './HelperFunctions';
-import Data from '../Data';
+
 
 
 class UserSignIn extends Component {
@@ -24,17 +23,6 @@ class UserSignIn extends Component {
     });
   };
 
-  // axios.post('/user', {
-  //   firstName: 'Fred',
-  //   lastName: 'Flintstone'
-  // })
-  // .then(function (response) {
-  //   console.log(response);
-  // })
-  // .catch(function (error) {
-  //   console.log(error);
-  // });
-
   handleSubmit(e) {
     e.preventDefault();
 
@@ -55,7 +43,7 @@ class UserSignIn extends Component {
       }
     }).catch( err => {
       console.log(err);
-      this.props.history.push('/error');
+      this.props.history.push('/');
     // login(user)
     // .then(res => {
     //   if(res){
@@ -70,7 +58,6 @@ class UserSignIn extends Component {
         return(
 
     <div id="root">
-     <Header />
     <div>
       <hr></hr>
       <div class="bounds">

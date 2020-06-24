@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Header from './Header';
 // import CourseDetail from './CourseDetail';
 // import {
 //   Link
@@ -42,7 +41,6 @@ class CourseList extends Component {
       })
         return(
             <div>
-            <Header />
             <hr />
             <div className="bounds">
             {coursesList}            

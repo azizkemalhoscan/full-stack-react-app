@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
 class UpdateCourse extends Component {
     render(){
         return(
             <div id="root">
             <div>
-             <Header />
               <hr></hr>
               <div class="bounds course--detail">
                 <h1>Update Course</h1>

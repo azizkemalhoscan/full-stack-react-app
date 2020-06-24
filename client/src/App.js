@@ -12,13 +12,20 @@ import CourseList from './components/CourseList.js';
 import CourseDetail from './components/CourseDetail.js';
 import UserSignIn from './components/UserSignIn.js';
 import UserSignUp from './components/UserSignUp.js';
+import Header from './components/Header.js';
 import UpdateCourse from './components/UpdateCourse.js';
 import CreateCourse from './components/CreateCourse.js';
 import withContext from './components/Context/Context.js';
-
+import PrivateRoute from './PrivaRoute';
+import UserSignOut from './components/UserSignOut.js';
 
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
+const HeaderWithContext = withContext(Header);
+const CreateCourseWithContext = withContext(CreateCourse);
+const UpdateCourseWithContext = withContext(UpdateCourse);
+const UserSignOutWithContext = withContext(UserSignOut);
+const CourseDetailWithContext = withContext(CourseDetail);
 
 // Do not get a general component state here rather use courses state in relative components like courses details and index
 class App extends Component {
@@ -40,18 +47,18 @@ class App extends Component {
   render(){
     return(
       <div>
-      <Provider value={this.state.courses}>
+      <HeaderWithContext />
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() => <CourseList coursesToList={this.state.courses} />} />
-            <Route path="/course/:id" render={(props) => <CourseDetail coursesDetail={this.state.courses} {...props} />} />
+            <Route path="/course/:id" render={(props) => <CourseDetailWithContext coursesDetail={this.state.courses} {...props} />} />
             <Route path="/signin" render={(props) => <UserSignInWithContext coursesDetail={this.state.courses} {...props} />} />
+            <Route path="/signout" render={(props) => <UserSignOutWithContext coursesDetail={this.state.courses} {...props} />} />
             <Route path="/signup" render={() => <UserSignUpWithContext coursesDetail={this.state.courses}  />} />
-            <Route path="/courses/:id/update" render={() => <UpdateCourse coursesDetail={this.state.courses} />} />
-            <Route path="/courses/create" render={() => <CreateCourse coursesDetail={this.state.courses} />} />
+            <PrivateRoute path="/courses/:id/update" render={() => <UpdateCourseWithContext coursesDetail={this.state.courses} />} />
+            <PrivateRoute path="/courses/create" render={() => <CreateCourseWithContext coursesDetail={this.state.courses} />} />
           </Switch>
         </BrowserRouter>
-      </Provider>
       </div>
     )   
   }

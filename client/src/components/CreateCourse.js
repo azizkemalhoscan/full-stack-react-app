@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './Header.js';
+
 
 class CreateCourse extends Component {
   state = {
@@ -71,7 +71,6 @@ class CreateCourse extends Component {
         return(
             <div id="root">
             <div>
-            <Header />
               <hr></hr>
               <div class="bounds course--detail">
                 <h1>Create Course</h1>

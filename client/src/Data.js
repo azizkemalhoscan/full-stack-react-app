@@ -24,7 +24,7 @@ class Data extends Component {
         return fetch(url, options);
     }
 
-    async getUSer(username, password) {
+    async getUser(username, password) {
         const response =  await this.api('/users', 'GET', null, true, { username, password});
         if (response.status === 200 ) {
             return response.json().then(data => data);

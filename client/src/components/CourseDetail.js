@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './Header';
+import { Consumer } from './Context/Context';
 
 
 class CourseDetail extends Component {
@@ -31,28 +31,18 @@ class CourseDetail extends Component {
           });
       }
 
-    //   removeCourse(removedId){
-    //     const requestMethod = {
-    //         method: 'DELETE'
-    //     };
-    //     fetch(`http://localhost:5000/api/courses/` + removedId +requestMethod)
-    //     .then(res => res.json())
-    //     .then(json => {
-    //         return json;
-    //     })
-    //   };
 
     render(){
-
+        const { context } = this.props;
+        console.log(context);
         return(
             <div id="root">
                 <div>
-                <Header />
                 <hr/>
                 <div>
                     <div className="actions--bar">
                     <div className="bounds">
-                        <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="#">Delete Course</a></span><a
+                        <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
                             className="button button-secondary" href="/">Return to List</a></div>
                     </div>
                     </div>
