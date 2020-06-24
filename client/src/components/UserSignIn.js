@@ -25,13 +25,13 @@ class UserSignIn extends Component {
   };
 
   handleSubmit(e) {
-
+    e.preventDefault();
 
     const { context } = this.props;
 
     const username = this.state.email;
     const password = this.state.password;
-
+    // e.preventDefault();
     context.actions.signIn(username, password)
     .then( user => {
       if( user === null){
@@ -52,7 +52,7 @@ class UserSignIn extends Component {
     //   }
     // })
     })
-    e.preventDefault();
+    // e.preventDefault();
   }
 
 
@@ -62,14 +62,14 @@ class UserSignIn extends Component {
     <div id="root">
     <div>
       <hr></hr>
-      <div class="bounds">
-        <div class="grid-33 centered signin">
+      <div className="bounds">
+        <div className="grid-33 centered signin">
           <h1>Sign In</h1>
           <div>
             <form onSubmit={(e) => {this.handleSubmit(e)}}>
               <div><input id="emailAddress" name="emailAddress" type="text" class="" placeholder="Email Address" value={this.state.email} onChange={(event) => {this.handleEmailEvent(event)}}></input></div>
               <div><input id="password" name="password" type="password" class="" placeholder="Password" value={this.state.password} onChange={(event) => {this.handlePasswordEvent(event)}}></input></div>
-              <div class="grid-100 pad-bottom"><button class="button" type="submit">Sign In</button><Link to='/'><button class="button button-secondary">Cancel</button></Link></div>
+              <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign In</button><Link to='/'><button className="button button-secondary">Cancel</button></Link></div>
             </form>
           </div>
           <p>&nbsp;</p>

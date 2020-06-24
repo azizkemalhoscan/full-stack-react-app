@@ -4,14 +4,14 @@ const Header = (props) => {
     const { context } = props;
 
 
-    const authUser = context.authenticatedUser;
-    console.log(authUser);
+    // const authUser = context.authenticatedUser
+    // console.log(authUser);
 
-    const conditionalHeaderRender = authUser ? 
+    const conditionalHeaderRender = context.authenticatedUser ? 
         <div className="header">
             <div className="bounds">  
                 <h1 className="header--logo">Courses</h1>
-                <nav><span>{`Welcome ${authUser.firstName}!`}</span><a className="signout" href="signout">Sign Out</a></nav>
+                <nav><span>{`Welcome ${context.authenticatedUser.firstName}!`}</span><a className="signout" href="signout">Sign Out</a></nav>
             </div>
         </div> 
     : 
