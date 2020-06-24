@@ -38,20 +38,6 @@ class UserSignUp extends Component {
             console.log(err);
             this.props.history.push('/');
           }); 
-        // event.preventDefault();
-
-
-        // axios
-        // .post('http://localhost:5000/users', {
-        //     user: {
-        //         firstName: firstName,
-        //         lastName: lastName,
-        //         emailAddress: emailAddress,
-        //         password: password,
-        //         confirmPassword: confirmPassword
-        //     }
-        // }, { withCredentials: true }).then(response => console.log('response', response)
-        // .catch(err => console.log('errors', err)))
     }
 
     cancel = () => {
@@ -63,8 +49,8 @@ class UserSignUp extends Component {
             <div id="root">           
                 <div>
                 <hr></hr>
-                <div class="bounds">
-                    <div class="grid-33 centered signin">
+                <div className="bounds">
+                    <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
                     <div>
                         <form onSubmit={() => {this.handleSubmit()}}>
@@ -74,7 +60,7 @@ class UserSignUp extends Component {
                         <div><input id="password" name="password" type="password" className="" placeholder="Password" onChange={(event) => {this.handleChange(event)}} value={this.state.password}></input></div>
                         <div><input id="confirmPassword" name="confirmPassword" type="password" className="" placeholder="Confirm Password"
                            onChange={(event) => {this.handleChange(event)}} value={this.state.confirmPassword}></input></div>
-                        <div class="grid-100 pad-bottom"><button class="button" type="submit">Sign Up</button><button className="button button-secondary" href='/'> Cancel</button></div>
+                        <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign Up</button><button className="button button-secondary" href='/'> Cancel</button></div>
                         </form>
                     </div>
                     <p>&nbsp;</p>

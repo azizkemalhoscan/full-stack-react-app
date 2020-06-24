@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 
 class CreateCourse extends Component {
+    
   state = {
     title: "",
     description: "",
@@ -16,55 +17,29 @@ class CreateCourse extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(e) {
         // POST request using fetch with error handling
         const { title, description, estimatedTime, materialsNeeded } = this.state;
-        const bodyElement = {
-          title: title,
-          description: description,
-          estimatedTime: estimatedTime,
-          materialsNeeded: materialsNeeded
-        }
+        const { context } = this.props;
+        const course = {
+          title,
+          description,
+          estimatedTime,
+          materialsNeeded,
+        };
 
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(bodyElement)
-      };
-
-
-
-      fetch('http://localhost:5000/api/courses', requestOptions)
-          .then(async response => {
-              const data = await response.json();
-  
-              // check for error response
-              if (!response.ok) {
-                  // get error message from body or default to response status
-                  const error = (data && data.message) || response.status;
-                  return Promise.reject(error);
-              }
-  
-              this.setState({ postId: data.id })
-          })
-          .catch(error => {
-              this.setState({ errorMessage: error.toString() });
-              console.error('There was an error!', error);
-          });
-
-    // const { title, description, estimatedTime, materialsNeeded } = this.state;
-    // axios
-    // .post('http://localhost:5000/courses', { 
-    //   course: {
-    //     title: title,
-    //     description: description,
-    //     estimatedTime: estimatedTime,
-    //     materialsNeeded: materialsNeeded
-    //   }
-    // })
-    // .then(response => console.log('response for course creation', response))
-    // .catch(err => console.log('error in createion!', err))
-    // event.preventDefault();
+        context.data.createCourses(course)
+        .then(errors => {
+          if(errors.length) {
+            this.setState({ errors });
+          } else {
+            console.log(`${title} is successfully created!`)
+          }
+        }).catch( err => {
+          console.log(err);
+          this.props.history.push('/');
+        });
+        e.preventDefault();
   }
 
     render(){
@@ -72,20 +47,20 @@ class CreateCourse extends Component {
             <div id="root">
             <div>
               <hr></hr>
-              <div class="bounds course--detail">
+              <div className="bounds course--detail">
                 <h1>Create Course</h1>
                 <div>
                   <div>
-                    <h2 class="validation--errors--label">Validation errors</h2>
-                    <div class="validation-errors">
+                    <h2 className="validation--errors--label">Validation errors</h2>
+                    <div className="validation-errors">
                       <ul>
                         <li>Please provide a value for "Title"</li>
                         <li>Please provide a value for "Description"</li>
                       </ul>
                     </div>
                   </div>
-                  <form submit={(event) => {this.handleSubmit(event)}}>
-                    <div class="grid-66">
+                  <form onSubmit={() => {this.handleSubmit()}}>
+                    <div className="grid-66">
                       <div className="course--header">
                         <h4 className="course--label">Course</h4>
                         <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."

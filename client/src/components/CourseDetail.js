@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Consumer } from './Context/Context';
 
 
 class CourseDetail extends Component {
@@ -34,7 +33,7 @@ class CourseDetail extends Component {
 
     render(){
         const { context } = this.props;
-        console.log(context);
+        console.log(context.authenticatedUser);
         return(
             <div id="root">
                 <div>

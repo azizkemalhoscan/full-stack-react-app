@@ -33,16 +33,16 @@ class App extends Component {
     courses: [],
   }
 
-  componentDidMount() {
-    fetch("http://localhost:5000/api/courses")
-    .then(res => res.json())
-    .then((data) => {
-      this.setState({ courses: data });
-    })
-    .catch(error => {
-      console.log('error getching' + error);
-    });
-  }
+  // componentDidMount() {
+  //   fetch("http://localhost:5000/api/courses")
+  //   .then(res => res.json())
+  //   .then((data) => {
+  //     this.setState({ courses: data });
+  //   })
+  //   .catch(error => {
+  //     console.log('error getching' + error);
+  //   });
+  // }
   render(){
     return(
       <div>
@@ -52,10 +52,10 @@ class App extends Component {
             <Route exact path="/" component={CourseListWithContext} />
             <Route path="/course/:id" component={CourseDetailWithContext} />
             <Route path="/signin" component={UserSignInWithContext} />
-            <Route path="/signout" render={(props) => <UserSignOutWithContext coursesDetail={this.state.courses} {...props} />} />
+            <Route path="/signout" component={UserSignOutWithContext} />
             <Route path="/signup" component={UserSignUpWithContext} />
-            <PrivateRoute path="/courses/:id/update" render={() => <UpdateCourseWithContext coursesDetail={this.state.courses} />} />
-            <PrivateRoute path="/courses/create" render={() => <CreateCourseWithContext coursesDetail={this.state.courses} />} />
+            <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
+            <Route path="/courses/create" component={CreateCourseWithContext} />
           </Switch>
         </BrowserRouter>
       </div>

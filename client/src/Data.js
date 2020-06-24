@@ -47,6 +47,19 @@ class Data extends Component {
             throw new Error();
         }
     }
+
+    async createCourses(course) {
+        const response = await this.api('/courses', 'POST', course);
+        if(response.status === 201) {
+            return [];
+        } else if (response.status === 400) {
+            return response.json().then(data => {
+                return data.errors;
+            });
+        } else {
+            throw new Error();
+        }
+    }
 }
 
 export default Data;

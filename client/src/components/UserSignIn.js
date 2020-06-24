@@ -25,7 +25,7 @@ class UserSignIn extends Component {
   };
 
   handleSubmit(e) {
-    e.preventDefault();
+
 
     const { context } = this.props;
 
@@ -39,9 +39,6 @@ class UserSignIn extends Component {
           return { signinErrors: ['Sign in is unsuccesfull'] }
         })
       } else {
-        this.setState(
-         { user: user}
-        )
         this.props.history.push('/');
         console.log(`SUCCESS! ${username} is now signed in!`);
       }
@@ -55,6 +52,7 @@ class UserSignIn extends Component {
     //   }
     // })
     })
+    e.preventDefault();
   }
 
 

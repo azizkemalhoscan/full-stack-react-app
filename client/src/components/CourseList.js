@@ -30,6 +30,8 @@ class CourseList extends Component {
 
 
     render(){
+
+      console.log(this.state.authenticatedUser);
       let coursesList = this.state.courses.map(course =>{
         return (
             <div className="grid-33"><a className="course--module course--link" href={`course/${course.id}`} >
