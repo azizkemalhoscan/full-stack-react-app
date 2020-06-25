@@ -47,7 +47,7 @@ class Data extends Component {
             throw new Error();
         }
     }
-
+// Without authentication and hardcoded userId this works well!
     async createCourses(course) {
         const response = await this.api('/courses', 'POST', course);
         if(response.status === 201) {
@@ -59,6 +59,19 @@ class Data extends Component {
         } else {
             throw new Error();
         }
+    }
+
+    async updateCourses(course){
+        const response = await this.api('/courses', 'PUT', course);
+        if(response.status === 201) {
+            return [];
+        } else if (response.status === 400) {
+            return response.json().then(data => {
+                return data.errors;
+            });
+        } else {
+            throw new Error();
+        }       
     }
 }
 

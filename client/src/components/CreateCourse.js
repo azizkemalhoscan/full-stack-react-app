@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-
 class CreateCourse extends Component {
     
   state = {
@@ -8,24 +7,27 @@ class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
-    // userId: null
+    userId: null || 11,
   }
 
   handleChange(event){
+    // event.preventDefault();
     this.setState({
       [event.target.name]: event.target.value
     });
+    event.preventDefault();
   }
 
   handleSubmit(e) {
         // POST request using fetch with error handling
-        const { title, description, estimatedTime, materialsNeeded } = this.state;
+        const { title, description, estimatedTime, materialsNeeded, userId } = this.state;
         const { context } = this.props;
         const course = {
           title,
           description,
           estimatedTime,
           materialsNeeded,
+          userId,
         };
 
         context.data.createCourses(course)
@@ -54,12 +56,12 @@ class CreateCourse extends Component {
                     <h2 className="validation--errors--label">Validation errors</h2>
                     <div className="validation-errors">
                       <ul>
-                        <li>Please provide a value for "Title"</li>
-                        <li>Please provide a value for "Description"</li>
+                      <li>Please provide a value for "Title"</li>
+                      <li>Please provide a value for "Description"</li>
                       </ul>
                     </div>
                   </div>
-                  <form onSubmit={() => {this.handleSubmit()}}>
+                  <form onSubmit={(e) => {this.handleSubmit(e)}}>
                     <div className="grid-66">
                       <div className="course--header">
                         <h4 className="course--label">Course</h4>
@@ -99,3 +101,14 @@ class CreateCourse extends Component {
 
 
 export default CreateCourse;
+
+
+
+// let titleDisplay = '';
+// let descriptionDisplay = '';
+// if(!this.state.description){
+//   return descriptionDisplay = <li>Please provide a value for "Description"</li>;
+// }
+// if(!this.state.title){
+//   return titleDisplay = <li>Please provide a value for "Title"</li>;
+// }

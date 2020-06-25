@@ -33,8 +33,8 @@ class CourseDetail extends Component {
 
     render(){
         const { context } = this.props;
-        console.log(context.authenticatedUser);
-        console.log(this.state.courses);
+        // console.log(context.authenticatedUser);
+        // console.log(this.state.courses);
         
         return(
             <div id="root">
@@ -43,7 +43,7 @@ class CourseDetail extends Component {
                 <div>
                     <div className="actions--bar">
                     <div className="bounds">
-                        <div className="grid-100"><span><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? 'block' : 'none' ) : 'none' )}} href="courses/update">Update Course</a><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? 'block' : 'none' ) : 'none' )}} onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
+                        <div className="grid-100"><span><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} href={`/courses/${this.state.courses.id}/update`} >Update Course</a><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
                             className="button button-secondary" href="/">Return to List</a></div>
                     </div>
                     </div>

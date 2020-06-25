@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 // import CourseDetail from './CourseDetail';
-// import {
-//   Link
-// } from 'react-router-dom';
+import {
+  Link
+} from 'react-router-dom';
 
 class Courses extends Component {
 
     state = {
-        authenticatedUser: this.props.context.authenticatedUser,
         courses: [],
     };
 
@@ -46,13 +45,15 @@ class Courses extends Component {
             <div>
             <hr />
             <div className="bounds">
-            {coursesList}            
-              <div className="grid-33"><a className="course--module course--add--module" href="/courses/create">
+            <div>
+            {coursesList}  
+            </div>          
+              <div className="grid-33"><Link to="/course/create"><a className="course--module course--add--module" >
                   <h3 className="course--add--title"><svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                       viewBox="0 0 13 13" className="add">
                       <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "></polygon>
                     </svg>New Course</h3>
-                </a></div>
+                </a></Link></div>
             </div>
         </div>
         )

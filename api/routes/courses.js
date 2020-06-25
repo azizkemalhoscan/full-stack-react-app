@@ -100,8 +100,10 @@ router.get('/courses/:id', asyncHandler( async(req, res) => {
 
 // Create Courses
 
-/**/
-router.post('/courses', courseValidations, authenticateUser, asyncHandler(async(req, res) => {
+/*
+authenticateUser,  <== This goes inside post request, I got rid of it for now to test
+*/
+router.post('/courses', courseValidations, asyncHandler(async(req, res) => {
   // const user = req.currentUser;
   const course = await Course.create(req.body);
   const errors = validationResult(req);
