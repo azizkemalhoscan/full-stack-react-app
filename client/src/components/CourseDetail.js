@@ -34,6 +34,8 @@ class CourseDetail extends Component {
     render(){
         const { context } = this.props;
         console.log(context.authenticatedUser);
+        console.log(this.state.courses);
+        
         return(
             <div id="root">
                 <div>
@@ -41,7 +43,7 @@ class CourseDetail extends Component {
                 <div>
                     <div className="actions--bar">
                     <div className="bounds">
-                        <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
+                        <div className="grid-100"><span><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? 'block' : 'none' ) : 'none' )}} href="courses/update">Update Course</a><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? 'block' : 'none' ) : 'none' )}} onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
                             className="button button-secondary" href="/">Return to List</a></div>
                     </div>
                     </div>
@@ -99,3 +101,8 @@ class CourseDetail extends Component {
 export default CourseDetail;
 
 // Materials Needed part should be updated it is not like what is intented
+// const renderButtons = context.authenticatedUser && context.authenticatedUser.id === this.state.courses.userId ?
+// <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
+// className="button button-secondary" href="/">Return to List</a></div>: 
+//                         <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" display="none" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
+//                         className="button button-secondary" href="/">Return to List</a></div>

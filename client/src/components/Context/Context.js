@@ -24,7 +24,6 @@ export class Provider extends Component {
         }
       };
 
-
     return (
         <Context.Provider value={value}>
           {this.props.children}
@@ -47,7 +46,9 @@ export class Provider extends Component {
 
     signOut = () => {
       this.setState({ authenticatedUser: null });
+      Cookies.remove('authenticatedUser');
     }
+
 }
 
 export default function withContext(Component) {

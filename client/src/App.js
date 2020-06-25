@@ -7,7 +7,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import CourseList from './components/CourseList.js';
+import Courses from './components/Courses.js';
 import CourseDetail from './components/CourseDetail.js';
 import UserSignIn from './components/UserSignIn.js';
 import UserSignUp from './components/UserSignUp.js';
@@ -25,7 +25,7 @@ const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 const UserSignOutWithContext = withContext(UserSignOut);
 const CourseDetailWithContext = withContext(CourseDetail);
-const CourseListWithContext = withContext(CourseList);
+const CourseListWithContext = withContext(Courses);
 
 // Do not get a general component state here rather use courses state in relative components like courses details and index
 class App extends Component {
@@ -50,7 +50,7 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={CourseListWithContext} />
-            <Route path="/course/:id" component={CourseDetailWithContext} />
+            <Route path="/courses/:id" component={CourseDetailWithContext} />
             <Route path="/signin" component={UserSignInWithContext} />
             <Route path="/signout" component={UserSignOutWithContext} />
             <Route path="/signup" component={UserSignUpWithContext} />

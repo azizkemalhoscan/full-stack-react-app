@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 //   Link
 // } from 'react-router-dom';
 
-class CourseList extends Component {
+class Courses extends Component {
 
     state = {
         authenticatedUser: this.props.context.authenticatedUser,
@@ -34,7 +34,7 @@ class CourseList extends Component {
       console.log(this.state.authenticatedUser);
       let coursesList = this.state.courses.map(course =>{
         return (
-            <div className="grid-33"><a className="course--module course--link" href={`course/${course.id}`} >
+            <div className="grid-33"><a className="course--module course--link" href={`courses/${course.id}`} >
             <h4 className="course--label">Course</h4>
             <h3 className="course--title">{course.title}</h3>
             <h3 className="course--title">{course.id}</h3>
@@ -60,7 +60,7 @@ class CourseList extends Component {
 }
 
 
-export default CourseList;
+export default Courses;
 
 
 //  This markup is for header
