@@ -59,7 +59,7 @@ function asyncHandler(cb){
 const authenticateUser = async(req, res, next) => {
   let message = null;
   const credentials = auth(req);
-  console.log(credentials);
+  // console.log(credentials);
   if(credentials){
     const users = await User.findAll();
     const user = await users.find(u => u.emailAddress === credentials.name);

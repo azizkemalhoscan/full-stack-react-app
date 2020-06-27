@@ -7,7 +7,7 @@ class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
-    userId: null || 11,
+    userId: this.props.context.authenticatedUser.id,
   }
 
   handleChange(event){
@@ -30,7 +30,9 @@ class CreateCourse extends Component {
           userId,
         };
 
-        context.data.createCourses(course)
+        context.data.createCourses(course).then(response => {
+          console.log(response.data);
+        })
         .then(errors => {
           if(errors.length) {
             this.setState({ errors });
@@ -45,6 +47,7 @@ class CreateCourse extends Component {
   }
 
     render(){
+      console.log(this.props.context.authenticatedUser.id);
         return(
             <div id="root">
             <div>

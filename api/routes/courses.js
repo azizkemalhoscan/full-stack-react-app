@@ -50,6 +50,7 @@ const authenticateUser = async(req, res, next) => {
     const users = await User.findAll();
     const user = await users.find(u => u.emailAddress === credentials.name);
     if(user){
+      console.log(req).currentUser;
       const authenticated = bcryptjs
       .compareSync( credentials.pass, user.password);
       if(authenticated){
@@ -119,8 +120,9 @@ router.post('/courses', courseValidations, asyncHandler(async(req, res) => {
 }));
 
 // Update Courses  // WORKS!
+// authenticateUser,
 
-router.put('/courses/:id', authenticateUser, courseValidations, asyncHandler( async(req, res) => {
+router.put('/courses/:id', courseValidations, asyncHandler( async(req, res) => {
   const course = await Course.findByPk(req.params.id);
   if(course){
     console.log(course);
@@ -129,7 +131,7 @@ router.put('/courses/:id', authenticateUser, courseValidations, asyncHandler( as
       description: req.body.description,
       estimatedTime: req.body.estimatedTime,
       materialsNeeded: req.body.materialsNeeded,
-      userId: req.body.userId,
+      // userId: req.body.userId,
     });
     res.sendStatus(204).end();
   } else {

@@ -62,7 +62,7 @@ class Data extends Component {
     }
 
     async updateCourses(course){
-        const response = await this.api('/courses', 'PUT', course);
+        const response = await this.api(`/courses/${course.id}`, 'PUT', course);
         if(response.status === 201) {
             return [];
         } else if (response.status === 400) {

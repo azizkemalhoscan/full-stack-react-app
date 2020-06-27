@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-
+// import UpdateCourse from './UpdateCourse';
+import axios from 'axios';
 
 class CourseDetail extends Component {
 
@@ -19,23 +20,46 @@ class CourseDetail extends Component {
       };
 
 
-    // Need Authentication here.
-    removeCourse(item) {
-        fetch(`http://localhost:5000/api/courses/` + item, {
-          method: 'delete'
-        })
-        .then(response => response.json())
-        .then((updatedData) => {
-            this.setState({ courses: updatedData });
-          });
-      }
 
+      
+    // Need Authentication here.
+    // removeCourse(item) {
+    //     fetch(`http://localhost:5000/api/courses/${}`  {
+    //       method: 'delete'
+    //     })
+    //     .then(response => response.json())
+    //     .then((updatedData) => {
+    //         this.setState({ courses: updatedData });
+    //       });
+    //   }
+      removeCourse(id) {
+          
+        const { context } = this.props;
+        axios.delete(`http://localhost:5000/api/courses/${id}`, 
+            {
+                user :context.authenticatedUser,
+                auth :{username:context.authenticatedUser.emailAddress, 
+                      password:context.authenticatedUser.password,
+                    }, 
+                headers:{Authorization: "token"},
+            }).then(response => {
+                console.log(response);
+            })
+        // axios.delete(`http://localhost:5000/api/courses/${id}`,
+        // {
+        //     withCredentials: true,
+        //     auth: {
+        //         username: 'joe@smith.com',
+        //         password: 'joepassword'               
+        //     }
+
+        // })
+      }
 
     render(){
         const { context } = this.props;
-        // console.log(context.authenticatedUser);
-        // console.log(this.state.courses);
-        
+        console.log(context.authenticatedUser)
+        // style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}}
         return(
             <div id="root">
                 <div>
@@ -43,7 +67,7 @@ class CourseDetail extends Component {
                 <div>
                     <div className="actions--bar">
                     <div className="bounds">
-                        <div className="grid-100"><span><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} href={`/courses/${this.state.courses.id}/update`} >Update Course</a><a class="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
+                        <div className="grid-100"><span><a class="button"  href={`/courses/${this.state.courses.id}/update`} >Update Course</a><a class="button"  onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
                             className="button button-secondary" href="/">Return to List</a></div>
                     </div>
                     </div>

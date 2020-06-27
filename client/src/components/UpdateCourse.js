@@ -1,6 +1,62 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 class UpdateCourse extends Component {
+   
+    state = {
+        course: [],
+        title: "",
+        description: "",
+        estimatedTime: "",
+        materialsNeeded: "",
+        userId: this.props.context.authenticatedUser.id,
+        
+      }
+
+      componentDidMount() {
+        fetch(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ course: data });
+        })
+        .catch(error => {
+          console.log('error getching' + error);
+        });
+      };
+
+
+    handleChange(event){
+      // event.preventDefault();
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+      event.preventDefault();
+    }
+
+    handleSubmit(e) {
+        let { title, description, estimatedTime, materialsNeeded, userId } = this.state;
+        axios.put(`http://localhost:5000/api/courses/${this.props.match.params.id}`, 
+        { title, 
+          description,
+          estimatedTime, 
+          materialsNeeded,
+          userId,
+          withCredentials: true,
+          auth: {
+            username: 'joe@smith.com',
+            password: 'joepassword'
+          } 
+        }).then(response => {
+        return console.log(response);
+      
+      })
+    }
+
+
     render(){
+      // const { context } = this.props;
+      // console.log(this.props.match.params.id);
+      // console.log(this.state.course.id);
         return(
             <div id="root">
             <div>
@@ -8,26 +64,16 @@ class UpdateCourse extends Component {
               <div class="bounds course--detail">
                 <h1>Update Course</h1>
                 <div>
-                  <form>
+                  <form  onSubmit={(e) => {this.handleSubmit(e)}}>
                     <div class="grid-66">
                       <div class="course--header">
                         <h4 class="course--label">Course</h4>
                         <div><input id="title" name="title" type="text" class="input-title course--title--input" placeholder="Course title..."
-                            value="Build a Basic Bookcase"></input></div>
-                        <p>By Joe Smith</p>
+                           onChange={(event) => {this.handleChange(event)}} value={this.state.title}></input></div>
+                        <p>BY USERS NAME!!!! CHANGE THIS</p>
                       </div>
                       <div class="course--description">
-                        <div><textarea id="description" name="description" class="" placeholder="Course description...">High-end furniture projects are great to dream about. But unless you have a well-equipped shop and some serious woodworking experience to draw on, it can be difficult to turn the dream into a reality.
-        
-        Not every piece of furniture needs to be a museum showpiece, though. Often a simple design does the job just as well and the experience gained in completing it goes a long way toward making the next project even better.
-        
-        Our pine bookcase, for example, features simple construction and it's designed to be built with basic woodworking tools. Yet, the finished project is a worthy and useful addition to any room of the house. While it's meant to rest on the floor, you can convert the bookcase to a wall-mounted storage unit by leaving off the baseboard. You can secure the cabinet to the wall by screwing through the cabinet cleats into the wall studs.
-        
-        We made the case out of materials available at most building-supply dealers and lumberyards, including 1/2 x 3/4-in. parting strip, 1 x 2, 1 x 4 and 1 x 10 common pine and 1/4-in.-thick lauan plywood. Assembly is quick and easy with glue and nails, and when you're done with construction you have the option of a painted or clear finish.
-        
-        As for basic tools, you'll need a portable circular saw, hammer, block plane, combination square, tape measure, metal rule, two clamps, nail set and putty knife. Other supplies include glue, nails, sandpaper, wood filler and varnish or paint and shellac.
-        
-        The specifications that follow will produce a bookcase with overall dimensions of 10 3/4 in. deep x 34 in. wide x 48 in. tall. While the depth of the case is directly tied to the 1 x 10 stock, you can vary the height, width and shelf spacing to suit your needs. Keep in mind, though, that extending the width of the cabinet may require the addition of central shelf supports.</textarea></div>
+                        <div><textarea id="description" name="description" class="" placeholder="Course description..." onChange={(event) => {this.handleChange(event)}} value={this.state.description}></textarea></div>
                       </div>
                     </div>
                     <div class="grid-25 grid-right">
@@ -36,20 +82,11 @@ class UpdateCourse extends Component {
                           <li class="course--stats--list--item">
                             <h4>Estimated Time</h4>
                             <div><input id="estimatedTime" name="estimatedTime" type="text" class="course--time--input"
-                                placeholder="Hours" value="14 hours"></input></div>
+                                placeholder="Hours" onChange={(event) => {this.handleChange(event)}} value={this.state.estimatedTime}></input></div>
                           </li>
                           <li class="course--stats--list--item">
                             <h4>Materials Needed</h4>
-                            <div><textarea id="materialsNeeded" name="materialsNeeded" class="" placeholder="List materials...">* 1/2 x 3/4 inch parting strip
-        * 1 x 2 common pine
-        * 1 x 4 common pine
-        * 1 x 10 common pine
-        * 1/4 inch thick lauan plywood
-        * Finishing Nails
-        * Sandpaper
-        * Wood Glue
-        * Wood Filler
-        * Minwax Oil Based Polyurethane
+                            <div><textarea id="materialsNeeded" name="materialsNeeded" class="" placeholder="List materials..." onChange={(event) => {this.handleChange(event)}} value={this.state.materialsNeeded}>
         </textarea></div>
                           </li>
                         </ul>
@@ -66,21 +103,55 @@ class UpdateCourse extends Component {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 export default UpdateCourse;
 
 
+      // componentDidMount() {
+      //   fetch(`http://localhost:5000/api/courses`)
+      //   .then(res => res.json())
+      //   .then((data) => {
+      //     this.setState({ courses: data });
+      //   })
+      //   .catch(error => {
+      //     console.log('error getching' + error);
+      //   });
+      // };
+
+// I am trying this with Axios!.
+//     handleSubmit(e) {
+//       // POST request using fetch with error handling
+//       const { title, description, estimatedTime, materialsNeeded} = this.state;
+//       const { context } = this.props;
+//       // const course = {
+//       //   title,
+//       //   description,
+//       //   estimatedTime,
+//       //   materialsNeeded,
+//       //   // userId,
+//       // };
+
+//       context.data.updateCourses(this.state.course)
+//       .then(errors => {
+//         if(errors.length) {
+//           this.setState({ errors });
+//         } else {
+//           console.log(`${title} is successfully created!`)
+//         }
+//       }).catch( err => {
+//         console.log(err);
+//         this.props.history.push('/');
+//       });
+//       e.preventDefault();
+// }
+
+      // axios({
+      //   method: 'put',
+      //   url: `http://localhost:5000/api/courses/${this.props.match.params.id}`,
+      //   data: {
+      //     title: this.state.title,
+
+      //   }
+      // })
 
 
 
