@@ -7,7 +7,7 @@ const User = require('../models').User;
 const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
 let courses = [];
-let users = [];
+
 /* ------------------------------------------------------------
  VALIDATIONS */
 
@@ -50,9 +50,7 @@ const authenticateUser = async(req, res, next) => {
     const users = await User.findAll();
     const user = await users.find(u => u.emailAddress === credentials.name);
     if(user){
-      console.log(req).currentUser;
-      const authenticated = bcryptjs
-      .compareSync( credentials.pass, user.password);
+      const authenticated = bcryptjs.compareSync( credentials.pass, user.password);
       if(authenticated){
         req.currentUser = user;
       } else {
@@ -104,7 +102,7 @@ router.get('/courses/:id', asyncHandler( async(req, res) => {
 /*
 authenticateUser,  <== This goes inside post request, I got rid of it for now to test
 */
-router.post('/courses', courseValidations, asyncHandler(async(req, res) => {
+router.post('/courses', authenticateUser, courseValidations, asyncHandler(async(req, res) => {
   // const user = req.currentUser;
   const course = await Course.create(req.body);
   const errors = validationResult(req);
@@ -120,9 +118,8 @@ router.post('/courses', courseValidations, asyncHandler(async(req, res) => {
 }));
 
 // Update Courses  // WORKS!
-// authenticateUser,
 
-router.put('/courses/:id', courseValidations, asyncHandler( async(req, res) => {
+router.put('/courses/:id', authenticateUser, courseValidations, asyncHandler( async(req, res) => {
   const course = await Course.findByPk(req.params.id);
   if(course){
     console.log(course);

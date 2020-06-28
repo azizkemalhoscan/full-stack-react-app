@@ -10,23 +10,17 @@ class Courses extends Component {
         courses: [],
     };
 
-    componentDidMount() {
-        fetch("http://localhost:5000/api/courses")
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ courses: data });
-        })
+  
+
+      componentDidMount () {
+        const { context } = this.props;
+        context.data.getCourses().then(
+          response => this.setState({courses: response})
+        )
         .catch(error => {
-          console.log('error catching' + error);
+          console.log('FAILLLLSSS error catching' + error);
         });
       }
-
-      // const item = this.state.courses.map(course => 
-      //   <CourseDetail 
-
-      //   />
-      //   );
-
 
     render(){
 
@@ -61,12 +55,4 @@ class Courses extends Component {
 
 
 export default Courses;
-
-
-//  This markup is for header
-
-
-// Header is going to be fixed 
-// Dom selector is going to be used/ Most probably
-// href course/id will be amended to ensure it is static.
 

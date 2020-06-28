@@ -7,7 +7,7 @@ class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
-    userId: this.props.context.authenticatedUser.id,
+    userId: null,
   }
 
   handleChange(event){
@@ -27,12 +27,12 @@ class CreateCourse extends Component {
           description,
           estimatedTime,
           materialsNeeded,
-          userId,
+          userId: this.props.context.authenticatedUser.id,
         };
+    const password = this.props.context.authenticatedUser.password;
+    const emailAddress = this.props.context.authenticatedUser.emailAddress;
 
-        context.data.createCourses(course).then(response => {
-          console.log(response.data);
-        })
+        context.data.createCourses(course, emailAddress, password)
         .then(errors => {
           if(errors.length) {
             this.setState({ errors });
@@ -47,7 +47,6 @@ class CreateCourse extends Component {
   }
 
     render(){
-      console.log(this.props.context.authenticatedUser.id);
         return(
             <div id="root">
             <div>
@@ -101,17 +100,4 @@ class CreateCourse extends Component {
     }
 }
 
-
-
 export default CreateCourse;
-
-
-
-// let titleDisplay = '';
-// let descriptionDisplay = '';
-// if(!this.state.description){
-//   return descriptionDisplay = <li>Please provide a value for "Description"</li>;
-// }
-// if(!this.state.title){
-//   return titleDisplay = <li>Please provide a value for "Title"</li>;
-// }

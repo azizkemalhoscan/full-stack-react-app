@@ -2,7 +2,11 @@ import { Component } from 'react';
 
 class Data extends Component {
 
-    api(path, method = 'GET', body = null, authRequire = false, credentials = null){
+    state = {
+
+    }
+
+    api(path, method = 'GET', body = null, requiresAuth = false, credentials = null){
         const url = "http://localhost:5000/api" + path;
 
         const options = {
@@ -16,16 +20,16 @@ class Data extends Component {
             options.body = JSON.stringify(body);
         }
 
-        if (authRequire) {
-            const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+        if (requiresAuth) {
+            const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
             options.headers['Authorization'] = `Basic ${encodedCredentials}`;
         }
 
         return fetch(url, options);
     }
 
-    async getUser(username, password) {
-        const response =  await this.api('/users', 'GET', null, true, { username, password});
+    async getUser(emailAddress, password) {
+        const response =  await this.api('/users', 'GET', null, true, { emailAddress, password});
         if (response.status === 200 ) {
             return response.json().then(data => data);
         } else if (response.status === 401) {
@@ -35,8 +39,24 @@ class Data extends Component {
         }
     }
 
+
+
+    async getCourse(id) {
+        const response = await this.api(`/courses/${id}`, 'GET', null, false, null);
+        if(response.status === 200) {
+            return response.json().then(data => data);
+        } else if (response.status === 400) {
+            return response.json().then(data => {
+                return data.errors;
+            });
+        } else {
+            throw new Error();
+        }
+    }
+
+
     async createUser(user) {
-        const response = await this.api('/users', 'POST', user);
+        const response = await this.api('/users', 'POST', user, true, null);
         if(response.status === 201) {
             return [];
         } else if (response.status === 400) {
@@ -47,9 +67,36 @@ class Data extends Component {
             throw new Error();
         }
     }
-// Without authentication and hardcoded userId this works well!
-    async createCourses(course) {
-        const response = await this.api('/courses', 'POST', course);
+
+    async getCourses() {
+        const response = await this.api('/courses', 'GET', null, false, null);
+        if(response.status === 200) {
+            return response.json().then(data => data);
+        } else if (response.status === 400) {
+            return response.json().then(data => {
+                return data.errors;
+            });
+        } else {
+            throw new Error();
+        }
+    }
+
+    async deleteCourse(id, emailAddress, password) {
+        const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { emailAddress, password });
+        if(response.status === 201) {
+            return [];
+        } else if (response.status === 400) {
+            return response.json().then(data => {
+                return data.errors;
+            });
+        } else {
+            throw new Error();
+        }      
+    }
+
+
+    async createCourses(course, emailAddress, password) {
+        const response = await this.api('/courses', 'POST', course, true, { emailAddress, password });
         if(response.status === 201) {
             return [];
         } else if (response.status === 400) {

@@ -9,56 +9,39 @@ class CourseDetail extends Component {
         };
 
     componentDidMount() {
-        fetch(`http://localhost:5000/api/courses/${this.props.match.params.id}`)
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ courses: data });
-        })
-        .catch(error => {
-          console.log('error getching' + error);
-        });
+        const { context } = this.props;
+        context.data.getCourse(this.props.match.params.id).then(
+            response => this.setState({
+                courses: response
+            }))
+            .catch(error => {
+                console.log('FAILLLLSSS error catching' + error);
+                })
       };
 
 
-
-      
-    // Need Authentication here.
-    // removeCourse(item) {
-    //     fetch(`http://localhost:5000/api/courses/${}`  {
-    //       method: 'delete'
-    //     })
-    //     .then(response => response.json())
-    //     .then((updatedData) => {
-    //         this.setState({ courses: updatedData });
-    //       });
-    //   }
-      removeCourse(id) {
-          
+      removeCourse() {
         const { context } = this.props;
-        axios.delete(`http://localhost:5000/api/courses/${id}`, 
-            {
-                user :context.authenticatedUser,
-                auth :{username:context.authenticatedUser.emailAddress, 
-                      password:context.authenticatedUser.password,
-                    }, 
-                headers:{Authorization: "token"},
-            }).then(response => {
-                console.log(response);
-            })
-        // axios.delete(`http://localhost:5000/api/courses/${id}`,
-        // {
-        //     withCredentials: true,
-        //     auth: {
-        //         username: 'joe@smith.com',
-        //         password: 'joepassword'               
-        //     }
+        const username = context.authenticatedUser.emailAddress;
+        const password = context.authenticatedUser.password;
+        context.data.deleteCourse(this.props.match.params.id, username, password )
 
-        // })
+        // const { context } = this.props;
+        // axios.delete(`http://localhost:5000/api/courses/${id}`, 
+        //     {
+        //         userReq :context.authenticatedUser,
+        //         auth :{
+        //             username: context.authenticatedUser.emailAddress, 
+        //             password: context.authenticatedUser.password,
+        //             }, 
+        //         headers:{Authorization: "token"},
+        //     }).then(response => {
+        //     })
       }
 
     render(){
         const { context } = this.props;
-        console.log(context.authenticatedUser)
+        console.log(context.authenticatedUser.password)
         // style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}}
         return(
             <div id="root">
