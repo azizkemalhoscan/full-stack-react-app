@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 // import UpdateCourse from './UpdateCourse';
-import axios from 'axios';
 
 class CourseDetail extends Component {
 
@@ -19,6 +18,9 @@ class CourseDetail extends Component {
                 })
       };
 
+
+    //   $2a$10$LdKDMrRd0tbgk2behb.E8urGI523sNNHFHKJjW6WqH/7Md44rDXiG
+    //   $2a$10$LdKDMrRd0tbgk2behb.E8urGI523sNNHFHKJjW6WqH/7Md44rDXiG
 
       removeCourse() {
         const { context } = this.props;

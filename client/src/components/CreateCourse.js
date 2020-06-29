@@ -7,7 +7,7 @@ class CreateCourse extends Component {
     description: "",
     estimatedTime: "",
     materialsNeeded: "",
-    userId: null,
+    userId: this.props.context.authenticatedUser.id,
   }
 
   handleChange(event){
@@ -27,7 +27,7 @@ class CreateCourse extends Component {
           description,
           estimatedTime,
           materialsNeeded,
-          userId: this.props.context.authenticatedUser.id,
+          userId,
         };
     const password = this.props.context.authenticatedUser.password;
     const emailAddress = this.props.context.authenticatedUser.emailAddress;

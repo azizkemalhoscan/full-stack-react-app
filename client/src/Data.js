@@ -83,7 +83,7 @@ class Data extends Component {
 
     async deleteCourse(id, emailAddress, password) {
         const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { emailAddress, password });
-        if(response.status === 201) {
+        if(response.status === 204) {
             return [];
         } else if (response.status === 400) {
             return response.json().then(data => {
@@ -108,8 +108,8 @@ class Data extends Component {
         }
     }
 
-    async updateCourses(course){
-        const response = await this.api(`/courses/${course.id}`, 'PUT', course);
+    async updateCourses(id, course, emailAddress, password){
+        const response = await this.api(`/courses/${id}`, 'PUT', course, true, { emailAddress, password });
         if(response.status === 201) {
             return [];
         } else if (response.status === 400) {

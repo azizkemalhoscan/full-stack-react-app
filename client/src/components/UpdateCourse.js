@@ -34,23 +34,32 @@ class UpdateCourse extends Component {
     }
 
     handleSubmit(e) {
-        let { title, description, estimatedTime, materialsNeeded, userId } = this.state;
-        axios.put(`http://localhost:5000/api/courses/${this.props.match.params.id}`, 
-        { title, 
+        const { context } = this.props;
+        const { title, description, estimatedTime, materialsNeeded, userId } = this.state;
+        const updatedCourse = {
+          title,
           description,
-          estimatedTime, 
+          estimatedTime,
           materialsNeeded,
           userId,
-          withCredentials: true,
-          auth: {
-            username: 'joe@smith.com',
-            password: 'joepassword'
-          } 
-        }).then(response => {
-        return console.log(response);
+        }
+
+        const emailAddress = context.authenticatedUser.emailAddress;
+        const password = context.authenticatedUser.password;
+
+        context.data.updateCourses(this.props.match.params.id, updatedCourse, emailAddress, password )
+        .then(errors => {
+          if(errors.length) {
+            this.setState({ errors });
+          } else {
+            console.log(`${title} is successfully created!`)
+          }
+        }).catch( err => {
+          console.log(err);
+          this.props.history.push('/');
+        });
       
-      })
-    }
+      }
 
 
     render(){

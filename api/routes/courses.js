@@ -46,11 +46,15 @@ function asyncHandler(cb){
 const authenticateUser = async(req, res, next) => {
   let message = null;
   const credentials = auth(req);
+  console.log(credentials);
   if(credentials){
     const users = await User.findAll();
     const user = await users.find(u => u.emailAddress === credentials.name);
+    console.log(user.emailAddress);
+    console.log(user.password);
     if(user){
-      const authenticated = bcryptjs.compareSync( credentials.pass, user.password);
+      // bcryptjs.compareSync( credentials.pass, user.password);
+      const authenticated = ( credentials.pass == user.password );
       if(authenticated){
         req.currentUser = user;
       } else {
