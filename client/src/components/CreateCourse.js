@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 class CreateCourse extends Component {
     
   state = {
@@ -8,6 +7,7 @@ class CreateCourse extends Component {
     estimatedTime: "",
     materialsNeeded: "",
     userId: this.props.context.authenticatedUser.id,
+    errors: [],
   }
 
   handleChange(event){
@@ -19,6 +19,7 @@ class CreateCourse extends Component {
   }
 
   handleSubmit(e) {
+    e.preventDefault();
         // POST request using fetch with error handling
         const { title, description, estimatedTime, materialsNeeded, userId } = this.state;
         const { context } = this.props;
@@ -35,18 +36,25 @@ class CreateCourse extends Component {
         context.data.createCourses(course, emailAddress, password)
         .then(errors => {
           if(errors.length) {
-            this.setState({ errors });
+            this.setState({ errors: errors });
           } else {
+            this.props.history.push('/');
             console.log(`${title} is successfully created!`)
           }
         }).catch( err => {
           console.log(err);
           this.props.history.push('/');
         });
-        e.preventDefault();
   }
 
     render(){
+const errorMessages = this.state.errors.map(eacherr => {
+  return(
+    <li>{eacherr}</li>
+  )
+})
+const validationErrors = errorMessages.length > 0 ? "Validation errors" : null;
+
         return(
             <div id="root">
             <div>
@@ -55,13 +63,14 @@ class CreateCourse extends Component {
                 <h1>Create Course</h1>
                 <div>
                   <div>
-                    <h2 className="validation--errors--label">Validation errors</h2>
+                  <div>
+                    <h2 className="validation--errors--label">{validationErrors}</h2>
                     <div className="validation-errors">
                       <ul>
-                      <li>Please provide a value for "Title"</li>
-                      <li>Please provide a value for "Description"</li>
+                        {errorMessages}
                       </ul>
                     </div>
+                    </div> 
                   </div>
                   <form onSubmit={(e) => {this.handleSubmit(e)}}>
                     <div className="grid-66">
@@ -90,7 +99,7 @@ class CreateCourse extends Component {
                         </ul>
                       </div>
                     </div>
-                    <div className="grid-100 pad-bottom"><button className="button" type="submit">Create Course</button><button className="button button-secondary"  href='/'>Cancel</button></div>
+                    <div className="grid-100 pad-bottom"><button className="button" type="submit">Create Course</button><a className="button button-secondary"  href='/'>Cancel</a></div>
                   </form>
                 </div>
               </div>

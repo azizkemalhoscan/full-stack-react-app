@@ -31,7 +31,7 @@ class UserSignIn extends Component {
 
     const username = this.state.email;
     const password = this.state.password;
-    // e.preventDefault();
+
     context.actions.signIn(username, password)
     .then( user => {
       if( user === null){
@@ -45,14 +45,7 @@ class UserSignIn extends Component {
     }).catch( err => {
       console.log(err);
       this.props.history.push('/');
-    // login(user)
-    // .then(res => {
-    //   if(res){
-    //     this.props.history.push('/');
-    //   }
-    // })
     })
-    // e.preventDefault();
   }
 
 
@@ -67,8 +60,8 @@ class UserSignIn extends Component {
           <h1>Sign In</h1>
           <div>
             <form onSubmit={(e) => {this.handleSubmit(e)}}>
-              <div><input id="emailAddress" name="emailAddress" type="text" class="" placeholder="Email Address" value={this.state.email} onChange={(event) => {this.handleEmailEvent(event)}}></input></div>
-              <div><input id="password" name="password" type="password" class="" placeholder="Password" value={this.state.password} onChange={(event) => {this.handlePasswordEvent(event)}}></input></div>
+              <div><input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" value={this.state.email} onChange={(event) => {this.handleEmailEvent(event)}}></input></div>
+              <div><input id="password" name="password" type="password" className="" placeholder="Password" value={this.state.password} onChange={(event) => {this.handlePasswordEvent(event)}}></input></div>
               <div className="grid-100 pad-bottom"><button className="button" type="submit">Sign In</button><Link to='/'><button className="button button-secondary">Cancel</button></Link></div>
             </form>
           </div>

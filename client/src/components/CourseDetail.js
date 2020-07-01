@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 // import UpdateCourse from './UpdateCourse';
+import ReactMarkdown from 'react-markdown';
+import ReactMarkdownExample from './ReactMarkdown.js';
+
 
 class CourseDetail extends Component {
 
@@ -27,23 +30,11 @@ class CourseDetail extends Component {
         const username = context.authenticatedUser.emailAddress;
         const password = context.authenticatedUser.password;
         context.data.deleteCourse(this.props.match.params.id, username, password )
-
-        // const { context } = this.props;
-        // axios.delete(`http://localhost:5000/api/courses/${id}`, 
-        //     {
-        //         userReq :context.authenticatedUser,
-        //         auth :{
-        //             username: context.authenticatedUser.emailAddress, 
-        //             password: context.authenticatedUser.password,
-        //             }, 
-        //         headers:{Authorization: "token"},
-        //     }).then(response => {
-        //     })
       }
 
     render(){
         const { context } = this.props;
-        console.log(context.authenticatedUser.password)
+        // console.log(context.authenticatedUser.firstName)
         // style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}}
         return(
             <div id="root">
@@ -52,20 +43,20 @@ class CourseDetail extends Component {
                 <div>
                     <div className="actions--bar">
                     <div className="bounds">
-                        <div className="grid-100"><span><a class="button"  href={`/courses/${this.state.courses.id}/update`} >Update Course</a><a class="button"  onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
+                        <div className="grid-100"><span><a className="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} href={`/courses/${this.state.courses.id}/update`} >Update Course</a><a className="button"  onClick={() => {this.removeCourse(this.props.match.params.id)}} style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} href="/">Delete Course</a></span><a
                             className="button button-secondary" href="/">Return to List</a></div>
                     </div>
                     </div>
-                    <div class="bounds course--detail">
+                    <div className="bounds course--detail">
                         <div>
                             <div className="grid-66">
                         <div className="course--header">
                         <h4 className="course--label">Course</h4>
                         <h3 className="course--title">{this.state.courses.title}</h3>
-                        <p>By Joe Smith</p>
+                        <p>By {context.authenticatedUser.firstName}</p>
                         </div>
                         <div className="course--description">
-                        <p>{this.state.courses.description}</p>
+                        <p><ReactMarkdown source={this.state.courses.description} /></p>
                         </div>
                     </div>
                     <div className="grid-25 grid-right">
@@ -78,7 +69,7 @@ class CourseDetail extends Component {
                             <li className="course--stats--list--item">
                             <h4>Materials Needed</h4>
                             <ul>
-                                <li>{this.state.courses.materialsNeeded}</li>
+                                <li><ReactMarkdown source={this.state.courses.materialsNeeded} /></li>
                                 {/* <li>1 x 2 common pine</li>
                                 <li>1 x 4 common pine</li>
                                 <li>1 x 10 common pine</li>

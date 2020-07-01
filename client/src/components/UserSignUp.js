@@ -28,17 +28,23 @@ class UserSignUp extends Component {
             confirmPassword,
           };
 
-          context.data.createUser(user)
-          .then(errors => {
-              if(errors.length) {
-                  this.setState({ errors });
-              } else {
-                  console.log(`${firstName} is succesfully signed up!`)
-              }
-          }).catch( err => { 
+          context.data.createUser(user);
+          context.actions.signIn(emailAddress, password)
+          .then( user => {
+            if( user === null){
+              this.setState(() => {
+                return { signinErrors: ['Sign in is unsuccesfull'] }
+              })
+            } else {
+              this.props.history.push('/');
+              console.log(`SUCCESS! ${emailAddress} is now signed in!`);
+            }
+          }).catch( err => {
             console.log(err);
             this.props.history.push('/');
-          }); 
+          })
+
+          
     }
 
     cancel = () => {
@@ -65,7 +71,7 @@ class UserSignUp extends Component {
                         </form>
                     </div>
                     <p>&nbsp;</p>
-                    <p>Already have a user account? <a href="sign-in.html">Click here</a> to sign in!</p>
+                    <p>Already have a user account? <a href="/signin">Click here</a> to sign in!</p>
                     </div>
                 </div>
                 </div>

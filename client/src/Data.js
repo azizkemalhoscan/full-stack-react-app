@@ -56,7 +56,7 @@ class Data extends Component {
 
 
     async createUser(user) {
-        const response = await this.api('/users', 'POST', user, true, null);
+        const response = await this.api('/users', 'POST', user, false, null);
         if(response.status === 201) {
             return [];
         } else if (response.status === 400) {

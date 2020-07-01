@@ -11,7 +11,7 @@ const Header = (props) => {
         <div className="header">
             <div className="bounds">  
                 <h1 className="header--logo">Courses</h1>
-                <nav><span>{`Welcome ${context.authenticatedUser.firstName}!`}</span><a className="signout" href="signout">Sign Out</a></nav>
+                <nav><span>{`Welcome ${context.authenticatedUser.firstName}!`}</span><a className="signout" href="/signout">Sign Out</a></nav>
             </div>
         </div> 
     : 
