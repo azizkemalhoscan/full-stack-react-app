@@ -16,7 +16,10 @@ class UserSignUp extends Component {
         });
     }
 
-    handleSubmit () {
+    handleSubmit (e) {
+
+        e.preventDefault();
+
         const { firstName, lastName, emailAddress, password, confirmPassword } = this.state;
         const { context } = this.props;
 
@@ -28,7 +31,11 @@ class UserSignUp extends Component {
             confirmPassword,
           };
 
-          context.data.createUser(user);
+          context.data.createUser(user).then(res => {
+              if(res ===201) {
+                  context.actions.signin(emailAddress, password)
+              }
+          })
           context.actions.signIn(emailAddress, password)
           .then( user => {
             if( user === null){
@@ -37,15 +44,16 @@ class UserSignUp extends Component {
               })
             } else {
               this.props.history.push('/');
-              console.log(`SUCCESS! ${emailAddress} is now signed in!`);
+              console.log(`SUCCESS! ${this.state.emailAddress} is now signed in!`);
             }
           }).catch( err => {
             console.log(err);
             this.props.history.push('/');
           })
-
+        //   context.actions.signIn(this.state.emailAddress, this.state.password)
           
     }
+
 
     cancel = () => {
         this.props.history.push('/');
@@ -60,7 +68,7 @@ class UserSignUp extends Component {
                     <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
                     <div>
-                        <form onSubmit={() => {this.handleSubmit()}}>
+                        <form onSubmit={(e) => {this.handleSubmit(e)}} >
                         <div><input id="firstName" name="firstName" type="text" className="" placeholder="First Name" onChange={(event) => {this.handleChange(event)}} value={this.state.firstName}></input></div>
                         <div><input id="lastName" name="lastName" type="text" className="" placeholder="Last Name" onChange={(event) => {this.handleChange(event)}} value={this.state.lastName}></input></div>
                         <div><input id="emailAddress" name="emailAddress" type="text" className="" placeholder="Email Address" onChange={(event) => {this.handleChange(event)}} value={this.state.email}></input></div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import UpdateCourse from './UpdateCourse';
 import ReactMarkdown from 'react-markdown';
-import ReactMarkdownExample from './ReactMarkdown.js';
+// import ReactMarkdownExample from './ReactMarkdown.js';
 
 
 class CourseDetail extends Component {
@@ -34,7 +34,7 @@ class CourseDetail extends Component {
 
     render(){
         const { context } = this.props;
-        // console.log(context.authenticatedUser.firstName)
+        console.log(this.state.courses)
         // style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}}
         return(
             <div id="root">
@@ -53,7 +53,7 @@ class CourseDetail extends Component {
                         <div className="course--header">
                         <h4 className="course--label">Course</h4>
                         <h3 className="course--title">{this.state.courses.title}</h3>
-                        <p>By {context.authenticatedUser.firstName}</p>
+                        <p>By </p>
                         </div>
                         <div className="course--description">
                         <p><ReactMarkdown source={this.state.courses.description} /></p>
@@ -68,18 +68,7 @@ class CourseDetail extends Component {
                             </li>
                             <li className="course--stats--list--item">
                             <h4>Materials Needed</h4>
-                            <ul>
-                                <li><ReactMarkdown source={this.state.courses.materialsNeeded} /></li>
-                                {/* <li>1 x 2 common pine</li>
-                                <li>1 x 4 common pine</li>
-                                <li>1 x 10 common pine</li>
-                                <li>1/4 inch thick lauan plywood</li>
-                                <li>Finishing Nails</li>
-                                <li>Sandpaper</li>
-                                <li>Wood Glue</li>
-                                <li>Wood Filler</li>
-                                <li>Minwax Oil Based Polyurethane</li> */}
-                            </ul>
+                                <ReactMarkdown source={this.state.courses.materialsNeeded} />                        
                             </li>
                         </ul>
                         </div>
@@ -106,3 +95,12 @@ export default CourseDetail;
 // className="button button-secondary" href="/">Return to List</a></div>: 
 //                         <div className="grid-100"><span><a class="button" href="courses/update">Update Course</a><a class="button" display="none" onClick={() => {this.removeCourse(this.props.match.params.id)}} href="/">Delete Course</a></span><a
 //                         className="button button-secondary" href="/">Return to List</a></div>
+                             /* <li>1 x 2 common pine</li>
+                                <li>1 x 4 common pine</li>
+                                <li>1 x 10 common pine</li>
+                                <li>1/4 inch thick lauan plywood</li>
+                                <li>Finishing Nails</li>
+                                <li>Sandpaper</li>
+                                <li>Wood Glue</li>
+                                <li>Wood Filler</li>
+                                <li>Minwax Oil Based Polyurethane</li> */
