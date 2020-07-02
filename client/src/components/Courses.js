@@ -21,6 +21,8 @@ class Courses extends Component {
 
     render(){
 
+// Loop over and send realtive values to CourseView component!.
+
       let coursesList = this.state.courses.map(course =>{
         return (
           <CourseView title={course.title} identity={course.id} key={course.id} />            

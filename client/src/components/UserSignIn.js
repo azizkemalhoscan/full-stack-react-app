@@ -24,6 +24,9 @@ class UserSignIn extends Component {
     });
   };
 
+
+// Signins a user if form is submitted.
+
   handleSubmit(e) {
     e.preventDefault();
 

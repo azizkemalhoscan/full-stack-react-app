@@ -22,9 +22,8 @@ class CourseDetail extends Component {
       };
 
 
-    //   $2a$10$LdKDMrRd0tbgk2behb.E8urGI523sNNHFHKJjW6WqH/7Md44rDXiG
-    //   $2a$10$LdKDMrRd0tbgk2behb.E8urGI523sNNHFHKJjW6WqH/7Md44rDXiG
 
+    //   Delete a course by the help of data.js delete course method.
       removeCourse() {
         const { context } = this.props;
         const username = context.authenticatedUser.emailAddress;
@@ -43,6 +42,7 @@ class CourseDetail extends Component {
                 <div>
                     <div className="actions--bar">
                     <div className="bounds">
+                    {/* ternary operator to show or hide delete and update buttons if the course viewed is a course that is created by user! */}
                         <div className="grid-100"><span><a className="button" style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} href={`/courses/${this.state.courses.id}/update`} >Update Course</a><a className="button"  onClick={() => {this.removeCourse(this.props.match.params.id)}} style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}} href="/">Delete Course</a></span><a
                             className="button button-secondary" href="/">Return to List</a></div>
                     </div>

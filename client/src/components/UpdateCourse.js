@@ -32,6 +32,8 @@ class UpdateCourse extends Component {
       event.preventDefault();
     }
 
+// Update a created course. This is similar to createing.
+
     handleSubmit(e) {
         const { context } = this.props;
         const { title, description, estimatedTime, materialsNeeded, userId } = this.state;

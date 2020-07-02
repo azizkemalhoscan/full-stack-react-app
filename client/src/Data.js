@@ -1,10 +1,16 @@
 import { Component } from 'react';
 
+
+// This class is for api requests. We are fetching data from our database with the help of following format.
+
+
 class Data extends Component {
 
     state = {
 
     }
+
+// The main format of our all requests.
 
     api(path, method = 'GET', body = null, requiresAuth = false, credentials = null){
         const url = "http://localhost:5000/api" + path;
@@ -19,6 +25,7 @@ class Data extends Component {
         if (body !== null) {
             options.body = JSON.stringify(body);
         }
+// This part is to send credentials in the header for authorization purposes.
 
         if (requiresAuth) {
             const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
@@ -27,6 +34,9 @@ class Data extends Component {
 
         return fetch(url, options);
     }
+
+
+    //  Getting a user 
 
     async getUser(emailAddress, password) {
         const response =  await this.api('/users', 'GET', null, true, { emailAddress, password});
@@ -39,7 +49,7 @@ class Data extends Component {
         }
     }
 
-
+// Get a course
 
     async getCourse(id) {
         const response = await this.api(`/courses/${id}`, 'GET', null, false, null);
@@ -54,6 +64,7 @@ class Data extends Component {
         }
     }
 
+// Create course
 
     async createUser(user) {
         const response = await this.api('/users', 'POST', user, false, null);
@@ -68,6 +79,8 @@ class Data extends Component {
         }
     }
 
+    // Get all courses
+
     async getCourses() {
         const response = await this.api('/courses', 'GET', null, false, null);
         if(response.status === 200) {
@@ -80,6 +93,8 @@ class Data extends Component {
             throw new Error();
         }
     }
+
+    // Delete a course
 
     async deleteCourse(id, emailAddress, password) {
         const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { emailAddress, password });
@@ -94,6 +109,7 @@ class Data extends Component {
         }      
     }
 
+    //  Create a course
 
     async createCourses(course, emailAddress, password) {
         const response = await this.api('/courses', 'POST', course, true, { emailAddress, password });
@@ -107,6 +123,8 @@ class Data extends Component {
             throw new Error();
         }
     }
+
+    // Update a course
 
     async updateCourses(id, course, emailAddress, password){
         const response = await this.api(`/courses/${id}`, 'PUT', course, true, { emailAddress, password });

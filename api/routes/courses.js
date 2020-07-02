@@ -54,7 +54,7 @@ const authenticateUser = async(req, res, next) => {
     if(user){
       //  When I try to create a course from postman, bscrpt works fine but from react it does not work!
       // bcryptjs.compareSync( credentials.pass, user.password);
-      const authenticated = ( credentials.pass === user.password);
+      const authenticated = bcryptjs.compare( credentials.pass, user.password);
       if(authenticated){
         req.currentUser = user;
       } else {
@@ -111,12 +111,13 @@ router.post('/courses', authenticateUser, courseValidations, asyncHandler(async(
   const course = await Course.create(req.body);
   // console.log(req);
   const errors = validationResult(req);
+  console.log(errors);
   if(!errors.isEmpty()){
     const errormessages = errors.array().map(error => error.msg);
     res.status(400).json({ errors: errormessages })
-    console.log(errors);
+    // console.log(errors);
     
-  } else {
+  } else if(errors.isEmpty()) {
     courses.push(course);
     res.status(201).location(`/courses/:${course.id}`).end();
   }

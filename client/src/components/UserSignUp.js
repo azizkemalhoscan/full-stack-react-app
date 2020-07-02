@@ -16,6 +16,8 @@ class UserSignUp extends Component {
         });
     }
 
+// This method registers a user as well as it makes registered user to signed in immediately.
+
     handleSubmit (e) {
 
         e.preventDefault();

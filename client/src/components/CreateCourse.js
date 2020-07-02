@@ -10,6 +10,8 @@ class CreateCourse extends Component {
     errors: [],
   }
 
+// This is where we handle the changes in the input areas. Whenever we start typing we see the typed charscters are set to the events state.
+
   handleChange(event){
     // event.preventDefault();
     this.setState({
@@ -17,6 +19,8 @@ class CreateCourse extends Component {
     });
     event.preventDefault();
   }
+
+// This function creates a course when user submits the form.
 
   handleSubmit(e) {
     e.preventDefault();
@@ -48,11 +52,17 @@ class CreateCourse extends Component {
   }
 
     render(){
+
+      // We are looping over error messages and if any log it into the html.
+
 const errorMessages = this.state.errors.map(eacherr => {
   return(
     <li>{eacherr}</li>
   )
 })
+
+// Ternary that checks if there are any errors and logs or not validation error to the html.
+
 const validationErrors = errorMessages.length > 0 ? "Validation errors" : null;
 
         return(

@@ -11,4 +11,6 @@ const CourseView = (props) => {
     )
 }
 
+// This component is to format each course to be presented with the whole other courses in Courses.js
+
 export default CourseView;

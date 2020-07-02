@@ -4,8 +4,7 @@ const Header = (props) => {
     const { context } = props;
 
 
-    // const authUser = context.authenticatedUser
-    // console.log(authUser);
+// Ternary operator is used to configure the UI of Header. Checking if the user is authenticated or not.
 
     const conditionalHeaderRender = context.authenticatedUser ? 
         <div className="header">
