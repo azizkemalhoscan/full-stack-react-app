@@ -34,15 +34,15 @@ class UserSignUp extends Component {
             confirmPassword,
           };
 
-          context.data.createUser(user).then(res => {
+          context.data.createUser(user)
+          .then(errors => {
+            return this.setState({
+                errors: errors
+            })
+    })
+          .then(res => {
               if(res ===201) {
                   return "done!"
-              }
-          }).then(errors => {
-              if(errors.length) {
-                  this.setState({
-                      errors: errors
-                  })
               }
           })
           context.actions.signIn(emailAddress, password)
@@ -70,6 +70,15 @@ class UserSignUp extends Component {
 
     render(){
         console.log(this.state.errors)
+        const errorMessages = this.state.errors.map(error => {
+            return (<div className="validation-errors">
+              <ul>
+                {error}
+              </ul>
+            </div>)
+        })
+
+        const validationErrors = errorMessages.length ? "Validation errors" : null;
         return(
             <div id="root">           
                 <div>
@@ -77,6 +86,12 @@ class UserSignUp extends Component {
                 <div className="bounds">
                     <div className="grid-33 centered signin">
                     <h1>Sign Up</h1>
+                    <div>
+                    <div>
+                    <h2 className="validation--errors--label">{validationErrors}</h2>
+                    </div>
+                        {errorMessages}
+                    </div>
                     <div>
                         <form onSubmit={(e) => {this.handleSubmit(e)}} >
                         <div><input id="firstName" name="firstName" type="text" className="" placeholder="First Name" onChange={(event) => {this.handleChange(event)}} value={this.state.firstName}></input></div>
