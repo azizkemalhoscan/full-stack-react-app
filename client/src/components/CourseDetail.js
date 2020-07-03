@@ -35,6 +35,7 @@ class CourseDetail extends Component {
 
         const { context } = this.props;
         const a = this.state.courses.User;
+        console.log(a);
 
     
         // style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}}
