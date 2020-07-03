@@ -68,18 +68,18 @@ class UpdateCourse extends Component {
 
     render(){
 
+      console.log(this.state.course)
+
+// Looped over error mesages and set them to a variable to be rendered.
 
       const errorMessages = this.state.errors.map(eacherr => {
         return(
           <li>{eacherr}</li>
         )
       });
-      console.log(errorMessages);
       const { context } = this.props;
       const validationErrors = errorMessages.length > 0 ? "Validation errors" : null;
 
-      // console.log(this.props.match.params.id);
-      // console.log(this.state.course.id);
         return(
             <div id="root">
             <div>

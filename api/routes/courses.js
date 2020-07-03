@@ -108,7 +108,7 @@ authenticateUser,  <== This goes inside post request, I got rid of it for now to
 */
 router.post('/courses', authenticateUser, courseValidations, asyncHandler(async(req, res) => {
   // const user = req.currentUser;
-  const course = await Course.create(req.body);
+  // const course = await Course.create(req.body);
   // console.log(req);
   const errors = validationResult(req);
   // console.log(errors.isEmpty());
@@ -117,7 +117,8 @@ router.post('/courses', authenticateUser, courseValidations, asyncHandler(async(
     res.status(400).json({ errors: errormessages })
     // console.log(errors);
     
-  } else if(course) {
+  } else {
+    const course = await Course.create(req.body);
     courses.push(course);
     res.status(201).location(`/courses/:${course.id}`).end();
   }
