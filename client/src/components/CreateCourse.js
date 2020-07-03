@@ -34,8 +34,8 @@ class CreateCourse extends Component {
           materialsNeeded,
           userId,
         };
-    const password = this.props.context.authenticatedUser.password;
-    const emailAddress = this.props.context.authenticatedUser.emailAddress;
+    const password = context.authenticatedUser.password;
+    const emailAddress = context.authenticatedUser.emailAddress;
 
         context.data.createCourses(course, emailAddress, password)
         .then(errors => {

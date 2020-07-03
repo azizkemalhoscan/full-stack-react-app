@@ -111,13 +111,13 @@ router.post('/courses', authenticateUser, courseValidations, asyncHandler(async(
   const course = await Course.create(req.body);
   // console.log(req);
   const errors = validationResult(req);
-  console.log(errors);
+  // console.log(errors.isEmpty());
   if(!errors.isEmpty()){
     const errormessages = errors.array().map(error => error.msg);
     res.status(400).json({ errors: errormessages })
     // console.log(errors);
     
-  } else if(errors.isEmpty()) {
+  } else if(course) {
     courses.push(course);
     res.status(201).location(`/courses/:${course.id}`).end();
   }
@@ -129,14 +129,18 @@ router.post('/courses', authenticateUser, courseValidations, asyncHandler(async(
 
 router.put('/courses/:id', authenticateUser, courseValidations, asyncHandler( async(req, res) => {
   const course = await Course.findByPk(req.params.id);
-  if(course){
-    console.log(course);
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    const errormessages = errors.array().map(error => error.msg);
+    res.status(400).json({ errors: errormessages })
+    // console.log(errors);  
+  } else if(course){
     await course.update({
       title: req.body.title,
       description: req.body.description,
       estimatedTime: req.body.estimatedTime,
       materialsNeeded: req.body.materialsNeeded,
-      // userId: req.body.userId,
+      userId: req.body.userId,
     });
     res.sendStatus(204).end();
   } else {

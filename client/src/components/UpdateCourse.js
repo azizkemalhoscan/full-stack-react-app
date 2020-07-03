@@ -9,6 +9,7 @@ class UpdateCourse extends Component {
         estimatedTime: "",
         materialsNeeded: "",
         userId: this.props.context.authenticatedUser.id,
+        errors: [],
         
       }
 
@@ -35,6 +36,7 @@ class UpdateCourse extends Component {
 // Update a created course. This is similar to createing.
 
     handleSubmit(e) {
+      e.preventDefault();
         const { context } = this.props;
         const { title, description, estimatedTime, materialsNeeded, userId } = this.state;
         const updatedCourse = {
@@ -51,9 +53,10 @@ class UpdateCourse extends Component {
         context.data.updateCourses(this.props.match.params.id, updatedCourse, emailAddress, password )
         .then(errors => {
           if(errors.length) {
-            this.setState({ errors });
+            this.setState({ errors: errors });
           } else {
-            console.log(`${title} is successfully created!`)
+            this.props.history.push('/');
+            console.log(`${title} is successfully updated!`)
           }
         }).catch( err => {
           console.log(err);
@@ -64,45 +67,65 @@ class UpdateCourse extends Component {
 
 
     render(){
-      // const { context } = this.props;
+
+
+      const errorMessages = this.state.errors.map(eacherr => {
+        return(
+          <li>{eacherr}</li>
+        )
+      });
+      console.log(errorMessages);
+      const { context } = this.props;
+      const validationErrors = errorMessages.length > 0 ? "Validation errors" : null;
+
       // console.log(this.props.match.params.id);
       // console.log(this.state.course.id);
         return(
             <div id="root">
             <div>
               <hr></hr>
-              <div class="bounds course--detail">
+              <div className="bounds course--detail">
                 <h1>Update Course</h1>
                 <div>
-                  <form  onSubmit={(e) => {this.handleSubmit(e)}}>
-                    <div class="grid-66">
-                      <div class="course--header">
-                        <h4 class="course--label">Course</h4>
-                        <div><input id="title" name="title" type="text" class="input-title course--title--input" placeholder="Course title..."
-                           onChange={(event) => {this.handleChange(event)}} value={this.state.title}></input></div>
-                        <p>BY USERS NAME!!!! CHANGE THIS</p>
+                  <div>
+                    <div>
+                      <h2 className="validation--errors--label">{validationErrors}</h2>
+                      <div className="validation-errors">
+                        <ul>
+                          {errorMessages}
+                        </ul>
                       </div>
-                      <div class="course--description">
-                        <div><textarea id="description" name="description" class="" placeholder="Course description..." onChange={(event) => {this.handleChange(event)}} value={this.state.description}></textarea></div>
+                      </div> 
+                    </div>
+                  <form  onSubmit={(e) => {this.handleSubmit(e)}}>
+                    <div className="grid-66">
+                      <div className="course--header">
+                        <h4 className="course--label">Course</h4>
+                        <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."
+                           onChange={(event) => {this.handleChange(event)}} value={this.state.title}></input></div>
+                        <p>by {context.authenticatedUser.firstName} {context.authenticatedUser.lastName}</p>
+                      </div>
+                      <div className="course--description">
+                        <div><textarea id="description" name="description" className="" placeholder="Course description..." onChange={(event) => {this.handleChange(event)}} value={this.state.description}></textarea></div>
                       </div>
                     </div>
-                    <div class="grid-25 grid-right">
-                      <div class="course--stats">
-                        <ul class="course--stats--list">
-                          <li class="course--stats--list--item">
+                    <div className="grid-25 grid-right">
+                      <div className="course--stats">
+                        <ul className="course--stats--list">
+                          <li className="course--stats--list--item">
                             <h4>Estimated Time</h4>
-                            <div><input id="estimatedTime" name="estimatedTime" type="text" class="course--time--input"
+                            <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input"
                                 placeholder="Hours" onChange={(event) => {this.handleChange(event)}} value={this.state.estimatedTime}></input></div>
                           </li>
-                          <li class="course--stats--list--item">
+                          <li className="course--stats--list--item">
                             <h4>Materials Needed</h4>
-                            <div><textarea id="materialsNeeded" name="materialsNeeded" class="" placeholder="List materials..." onChange={(event) => {this.handleChange(event)}} value={this.state.materialsNeeded}>
+                            <div><textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..." onChange={(event) => {this.handleChange(event)}} value={this.state.materialsNeeded}>
         </textarea></div>
                           </li>
                         </ul>
                       </div>
                     </div>
-                    <div class="grid-100 pad-bottom"><button class="button" type="submit">Update Course</button><button class="button button-secondary" onclick="event.preventDefault(); location.href='course-detail.html';">Cancel</button></div>
+                    <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><a className="button button-secondary"  href='/' >Cancel</a></div>
                   </form>
                 </div>
               </div>
@@ -162,25 +185,6 @@ export default UpdateCourse;
 
       //   }
       // })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -106,6 +106,7 @@ router.post('/users', allValidations, asyncHandler(async(req, res) => {
   if(!errors.isEmpty()){
     const errormessages = errors.array().map(error => error.msg);
     res.status(400).json({ errors: errormessages })
+    console.log(errors);
   } else {
     req.body.password = await bcryptjs.hashSync(req.body.password);
     const user = await User.create(req.body);

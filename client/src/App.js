@@ -5,7 +5,8 @@ import  { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import Courses from './components/Courses.js';
 import CourseDetail from './components/CourseDetail.js';
@@ -17,6 +18,7 @@ import CreateCourse from './components/CreateCourse.js';
 import withContext from './components/Context/Context.js';
 import PrivateRoute from './PrivaRoute';
 import UserSignOut from './components/UserSignOut.js';
+import NotFound from './components/Notfound.js';
 
 const UserSignUpWithContext = withContext(UserSignUp);
 const UserSignInWithContext = withContext(UserSignIn);
@@ -56,6 +58,8 @@ class App extends Component {
             <Route path="/signup" component={UserSignUpWithContext} />
             <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
             <PrivateRoute path="/course/create" component={CreateCourseWithContext} />
+            <Route path='/404' component={NotFound} />
+            <Redirect to='/404' />
           </Switch>
         </BrowserRouter>
       </div>

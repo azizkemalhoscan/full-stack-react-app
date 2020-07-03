@@ -7,7 +7,8 @@ class UserSignUp extends Component {
         lastName: "",
         emailAddress: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        errors: [],
     }
 
     handleChange (event) {
@@ -35,7 +36,13 @@ class UserSignUp extends Component {
 
           context.data.createUser(user).then(res => {
               if(res ===201) {
-                  context.actions.signin(emailAddress, password)
+                  return "done!"
+              }
+          }).then(errors => {
+              if(errors.length) {
+                  this.setState({
+                      errors: errors
+                  })
               }
           })
           context.actions.signIn(emailAddress, password)
@@ -62,6 +69,7 @@ class UserSignUp extends Component {
        }
 
     render(){
+        console.log(this.state.errors)
         return(
             <div id="root">           
                 <div>
