@@ -33,10 +33,12 @@ class CourseDetail extends Component {
 
     render(){
 
+
+        // Problem solved but page is being rendered multiple times.
         const { context } = this.props;
         const a = this.state.courses.User;
-        console.log(a);
-
+        const userFirstname = a ?  a.firstName : null;
+        const userLastname = a ? a.lastName : null;
     
         // style={{display:( context.authenticatedUser  ? ( this.state.courses.userId === context.authenticatedUser.id  ? '' : 'none' ) : 'none' )}}
         return(
@@ -57,10 +59,10 @@ class CourseDetail extends Component {
                         <div className="course--header">
                         <h4 className="course--label">Course</h4>
                         <h3 className="course--title">{this.state.courses.title}</h3>
-                        <p>By </p>
+                        <p>By {userFirstname} {userLastname} </p>
                         </div>
                         <div className="course--description">
-                        <p><ReactMarkdown source={this.state.courses.description} /></p>
+                        <ReactMarkdown source={this.state.courses.description} />
                         </div>
                     </div>
                     <div className="grid-25 grid-right">
