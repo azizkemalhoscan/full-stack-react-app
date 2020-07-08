@@ -125,7 +125,7 @@ class UpdateCourse extends Component {
                         </ul>
                       </div>
                     </div>
-                    <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><a className="button button-secondary"  href='/' >Cancel</a></div>
+                    <div className="grid-100 pad-bottom"><button className="button" type="submit">Update Course</button><a className="button button-secondary"  href={`/courses/${this.state.course.id}`}>Cancel</a></div>
                   </form>
                 </div>
               </div>

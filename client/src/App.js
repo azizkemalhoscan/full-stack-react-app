@@ -16,7 +16,7 @@ import Header from './components/Header.js';
 import UpdateCourse from './components/UpdateCourse.js';
 import CreateCourse from './components/CreateCourse.js';
 import withContext from './components/Context/Context.js';
-import PrivateRoute from './PrivaRoute';
+import PrivateRoute from './PrivateRoute';
 import UserSignOut from './components/UserSignOut.js';
 import NotFound from './components/Notfound.js';
 
